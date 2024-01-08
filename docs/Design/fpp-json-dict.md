@@ -788,13 +788,14 @@ module MyModule {
 | `frameworkVersion` | **String** representing the F´ framework version (semantic versioning) | **String** | true |
 | `projectVersion` | **String** representing the project version (semantic versioning) | **String** | true |
 | `libraryVersions` | **Array of Strings** corresponding to the version (semantic versioning) of libraries used by the F´ project | **Array of Strings** | true
-
+| `dictionarySpecVersion` | **String** representing the JSON dictionary specification version | **String** | true |
 ```json
 {
     "deploymentName": "MyDeployment",
     "frameworkVersion": "3.3.2",
     "projectVersion": "1.0.0",
-    "libraryVersions": []
+    "libraryVersions": [],
+    "dictionarySpecVersion": "1.0.0"
 }
 ```
 
@@ -816,7 +817,8 @@ module MyModule {
         "deploymentName": "MyDeployment",
         "frameworkVersion": "3.3.2",
         "projectVersion": "1.0.0",
-        "libraryVersions": []
+        "libraryVersions": [],
+        "dictionarySpecVersion": "1.0.0"
     },
     "enums": [
         {

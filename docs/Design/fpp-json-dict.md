@@ -455,9 +455,6 @@ Example JSON of a struct:
 | `type` | [Type Name](#type-names) of the parameter | [Type Name](#type-names) | true |
 | `default` | Default value (of type specified in `type`)  of the parameter | Value of type specified in `type` | false |
 | `numericIdentifier` | **Number** representing the numeric identifier of the parameter | **Number** | false |
-| `setOpcode` | **Number** representing the opcode of the command for setting the parameter | **Number** | false |
-| `saveOpcode` | **Number** representing the opcode of the command for saving the parameter | **Number** | false |
-
 
 Example FPP model with JSON representation:
 ```
@@ -485,9 +482,7 @@ module MyModule {
         "size": 32
     },
     "default": 0,
-    "numericIdentifier": "256",
-    "setOpcode": "257",
-    "saveOpcode": "258"
+    "numericIdentifier": "256"
 }
 ```
 
@@ -1027,9 +1022,7 @@ module MyModule {
                 "size": 32
             },
             "default": 0,
-            "numericIdentifier": 256,
-            "setOpcode": 257,
-            "saveOpcode": 258
+            "numericIdentifier": 256
         }
     ]
 }

@@ -162,7 +162,7 @@ Example JSON of bool
 | ----- | ----------- | ------- | -------- |
 | `name` | **String** representing the FPP type name |  string | true |
 | `kind` | **String** representing the kind of type | string | true | 
-| `size` | **Number** of bytes supported by the data type | **Number** in the range [0, 2<sup>31</sup>) | true |
+| `size` | **Number** of bytes supported by the data type | **Number** in the range [0, 2<sup>31</sup>) | false |
 
 ### String Types
 Any sequence of characters
@@ -200,7 +200,7 @@ Example JSON of qualified name
 | `qualifiedName` | **String** representing unique qualified name of element in FPP model | Period separated **String** | true |
 | `size` | Max **Number** of elements that can be in the data structure | **Number** | true |
 | `elementType` | A **JSON dictionary** representing the type of array | **JSON Dictionary** | true
-| `default` | Default array value | Value of type specified in `elementType` | false |
+| `default` | Default array value | Value of type specified in `elementType` | true |
 
 
 Example FPP model with JSON representation:
@@ -234,7 +234,7 @@ module M {
 | `qualifiedName` | String representing unique qualified name of element in FPP model | Period separated **String** | true |
 | `representationType` | The [Type Name](#type-names) of values in the enumeration | [Type Name](#type-names) | true |
 | `identifiers` | Dictionary of identifiers (keys) and numeric values (values) | **JSON Dictionary** | true |
-| `default` | String qualified name of the enumeration value | **String** qualified name | false |
+| `default` | String qualified name of the enumeration value | **String** qualified name | true |
 
 Example FPP model with JSON representation:
 ```
@@ -281,7 +281,7 @@ module M {
 | `kind` | String representing the kind of type | struct | true |
 | `qualifiedName` | String representing unique qualified name of element in FPP model | Period separated **String** | true |
 | `members` | JSON dictionary consisting of **String** identifier (key) and [Struct Member](#struct-member) (value) | JSON dictionary | true |
-| `default` | JSON dictionary consisting of **String** identifier (key) and default value (value) | JSON dictionary | false |
+| `default` | JSON dictionary consisting of **String** identifier (key) and default value (value) | JSON dictionary | true |
 
 Example FPP model with JSON representation:
 ```
@@ -431,7 +431,7 @@ Example JSON of a struct:
 | `identifier` | **String** identifier | **String** | true |
 | `description` | **String** annotation of parameter | **String** | true |
 | `type` | [Type Name](#type-names) of parameter | [Type Name](#type-names) | true |
-| `ref` | **Boolean** indicating whether the formal parameter is to be passed by referenced when it is used in a synchronous port invocation | **Boolean** | false |
+| `ref` | **Boolean** indicating whether the formal parameter is to be passed by referenced when it is used in a synchronous port invocation | **Boolean** | true |
 
 ```json
 {
@@ -454,7 +454,7 @@ Example JSON of a struct:
 | `description` | **String** annotation of parameter | **String** | true |
 | `type` | [Type Name](#type-names) of the parameter | [Type Name](#type-names) | true |
 | `default` | Default value (of type specified in `type`)  of the parameter | Value of type specified in `type` | false |
-| `numericIdentifier` | **Number** representing the numeric identifier of the parameter | **Number** | false |
+| `numericIdentifier` | **Number** representing the numeric identifier of the parameter | **Number** | true |
 
 Example FPP model with JSON representation:
 ```
@@ -494,8 +494,8 @@ module MyModule {
 | `opcode` | **Number** command opcode | **Number** | true |
 | `description` | **String** annotation of command | string | true |
 | `formalParams` | Array of [Formal Parameters](#formal-parameters) | Array of [Formal Parameters](#formal-parameters) | true |
-| `priority` | **Number** representing the priority for the command on the input queue | **Number** | false |
-| `queueFullBehavior` | **String** representing the behavior of the command when the input full is queue | assert, block, drop | false |
+| `priority` | **Number** representing the priority for the command on the input queue | **Number** | required for async command kinds |
+| `queueFullBehavior` | **String** representing the behavior of the command when the input full is queue | assert, block, drop | required for async command kinds |
 
 Example FPP model with JSON representation:
 ```
@@ -551,7 +551,7 @@ module MyComponents {
 | `description` | **String** annotation of channel | **String** | true |
 | `type` | [Type Name](#type-names) the telemetry channel | [Type Name](#type-names) | true |
 | `numericIdentifier` | **Number** representing numeric identifier | **Number** | true |
-| `telemetryUpdate` | **String** representing when the telemetry channel can update | always, on change | false |
+| `telemetryUpdate` | **String** representing when the telemetry channel can update | always, on change | true |
 | `formatString` | **String** format with a single argument (the telemetry channel) | **String** | false |
 | `limit` | **JSON dictionary** consisting of low and high limits | **JSON dictionary** | false |
 

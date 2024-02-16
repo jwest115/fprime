@@ -428,14 +428,14 @@ Example JSON of a struct:
 ## Formal Parameters
 | Field | Description | Options | Required |
 | ----- | ----------- | ------- | -------- |
-| `identifier` | **String** identifier | **String** | true |
+| `name` | **String** name | **String** | true |
 | `description` | **String** annotation of parameter | **String** | true |
 | `type` | [Type Name](#type-names) of parameter | [Type Name](#type-names) | true |
 | `ref` | **Boolean** indicating whether the formal parameter is to be passed by referenced when it is used in a synchronous port invocation | **Boolean** | true |
 
 ```json
 {
-    "identifier": "param1",
+    "name": "param1",
     "description": "Param 1",
     "type": {
         "name": "U32",
@@ -450,30 +450,28 @@ Example JSON of a struct:
 ## Parameters
 | Field | Description | Options | Required |
 | ----- | ----------- | ------- | -------- |
-| `identifier` | **String** qualified name of the parameter | Period separated **String** | true |
+| `name` | **String** qualified name of the parameter | Period separated **String** | true |
 | `description` | **String** annotation of parameter | **String** | true |
 | `type` | [Type Name](#type-names) of the parameter | [Type Name](#type-names) | true |
 | `default` | Default value (of type specified in `type`)  of the parameter | Value of type specified in `type` | false |
-| `numericIdentifier` | **Number** representing the numeric identifier of the parameter | **Number** | true |
+| `identifier` | **Number** representing the numeric identifier of the parameter | **Number** | true |
 
 Example FPP model with JSON representation:
 ```
-module MyModule {
-    active component FirstComponent {
-        @ This is the annotation for Parameter 1
-        param Parameter1: U32 \
-            id 0x100 \
-            set opcode 0x101 \
-            save opcode 0x102
+active component FirstComponent {
+    @ This is the annotation for Parameter 1
+    param Parameter1: U32 \
+        id 0x100 \
+        set opcode 0x101 \
+        save opcode 0x102
 
-        ...
-    }
+    ...
 }
 ```
 
 ```json
 {
-    "identifier": "MyModule.FirstComponent.Parameter1",
+    "name": "c1.FirstComponent.Parameter1",
     "description": "This is the annotation for Parameter 1",
     "type": {
         "name": "U32",
@@ -482,14 +480,14 @@ module MyModule {
         "size": 32
     },
     "default": 0,
-    "numericIdentifier": "256"
+    "identifier": "256"
 }
 ```
 
 ## Commands
 | Field | Description | Options | Required |
 | ----- | ----------- | ------- | -------- |
-| `identifier` | **String** qualified name of the command | Period separated **String** | true |
+| `name` | **String** qualified name of the command | Period separated **String** | true |
 | `commandKind` | **String** representing the kind of command | async, guarded, sync | true |
 | `opcode` | **Number** command opcode | **Number** | true |
 | `description` | **String** annotation of command | string | true |
@@ -499,28 +497,26 @@ module MyModule {
 
 Example FPP model with JSON representation:
 ```
-module MyComponents {
-    active component FirstComponent {
-        @ A sync command with parameters
-        sync command SyncParams(
-            param1: U32 @< Param 1
-            param2: string @< Param 2
-        ) opcode 0x100
-        
-        ...
-    }
+active component FirstComponent {
+    @ A sync command with parameters
+    sync command SyncParams(
+        param1: U32 @< Param 1
+        param2: string @< Param 2
+    ) opcode 0x100
+    
+    ...
 }
 ```
 
 ```json
 {
-    "identifier": "MyComponents.FirstComponent.SyncParams",
+    "name": "c1.FirstComponent.SyncParams",
     "commandKind": "sync",
     "opcode": 256,
     "description": "A sync command with parameters",
     "formalParams": [
         {
-            "identifier": "param1",
+            "name": "param1",
             "description": "Param 1",
             "type": {
                 "name": "U32",
@@ -531,7 +527,7 @@ module MyComponents {
             "ref": false
         },
          {
-            "identifier": "param2",
+            "name": "param2",
             "description": "Param 2",
             "type": {
                 "name": "string",
@@ -547,41 +543,39 @@ module MyComponents {
 ## Telemetry Channels
 | Field | Description | Options | Required |
 | ----- | ----------- | ------- | -------- |
-| `identifier` | **String** qualified name of the telemetry channel | Period separated **String** | true |
+| `name` | **String** qualified name of the telemetry channel | Period separated **String** | true |
 | `description` | **String** annotation of channel | **String** | true |
 | `type` | [Type Name](#type-names) the telemetry channel | [Type Name](#type-names) | true |
-| `numericIdentifier` | **Number** representing numeric identifier | **Number** | true |
+| `identifier` | **Number** representing numeric identifier | **Number** | true |
 | `telemetryUpdate` | **String** representing when the telemetry channel can update | always, on change | true |
 | `formatString` | **String** format with a single argument (the telemetry channel) | **String** | false |
 | `limit` | **JSON dictionary** consisting of low and high limits | **JSON dictionary** | false |
 
 Example FPP model with JSON representation:
 ```
-module MyModule {
-    active component FirstComponent {
-        @ Telemetry channel 1
-        telemetry Channel1: F64 \
-            id 0x100 \
-            update on change \
-            low { yellow -1, orange -2, red -3 } \
-            high { yellow 1, orange 2, red 3 }
-        
-        ...
-    }
+active component FirstComponent {
+    @ Telemetry channel 1
+    telemetry Channel1: F64 \
+        id 0x100 \
+        update on change \
+        low { yellow -1, orange -2, red -3 } \
+        high { yellow 1, orange 2, red 3 }
+    
+    ...
 }
 ```
 
 ```json
 [
     {
-        "identifier": "MyModule.FirstComponent.Channel1",
+        "name": "c1.FirstComponent.Channel1",
         "description": "Telemetry channel 1",
         "type": {
             "type": "F64",
             "kind": "float",
             "size": 64
         },
-        "numericIdentifier": 256,
+        "identifier": 256,
         "telemetryUpdate": "on change",
         "limit": {
             "low": {
@@ -602,44 +596,41 @@ module MyModule {
 ## Events
 | Field | Description | Options | Required |
 | ----- | ----------- | ------- | -------- |
-| `identifier` | **String** qualified name of the event | Period separated **String** | true |
+| `name` | **String** qualified name of the event | Period separated **String** | true |
 | `description` | **String** annotation of event | **String** | true |
-| `severity` | **String** representing severity of the event | activity high, activity low, command, diagnostic, fatal, warning high, warning low | true |
+| `severity` | **String** representing severity of the event | ACTIVITY_HIGH, ACTIVITY_LOW, COMMAND, DIAGNOSTIC, FATAL, WARNING_HIGH, WARNING_LOW | true |
 | `formalParams` | Array of [Formal Parameters](#formal-parameters) | Array [Formal Parameters](#formal-parameters) | true |
-| `numericIdentifier` | **Number** representing the numeric identifier of the event | **Number** | true |
+| `identifier` | **Number** representing the numeric identifier of the event | **Number** | true |
 | `formatString` | **String** format with event parameters as arguments | **String** | false |
 | `throttle` | **Number** representing the maximum number of times to emit the event before throttling it | **Number** | false |
 
 
 Example FPP model with JSON representation:
 ```
-module MyModule {
-    active component FirstComponent {
-        @ This is the annotation for Event 0
-        event Event0 \
-            severity activity low \
-            id 0x100 \
-            format "Event 0 occurred"
-        
-        ...
-    }
+active component FirstComponent {
+    @ This is the annotation for Event 0
+    event Event0 \
+        severity activity low \
+        id 0x100 \
+        format "Event 0 occurred"
+    
+    ...
 }
 ```
 
 ```json
 {
-    "identifier": "MyModule.FirstComponent.Event0",
+    "name": "c1.FirstComponent.Event0",
     "description": "This is the annotation for Event 0",
-    "severity": "activity low",
+    "severity": "ACTIVITY_LOW",
     "formalParams": [],
-    "numericIdentifier": 256,
+    "identifier": 256,
     "formatString": "Event 0 occurred",
 }
 ```
 
 Example FPP model with JSON representation:
 ```
-module MyModule {
     active component FirstComponent {
         @ This is the annotation for Event 1
         @ Sample output: "Event 1 occurred with argument 42"
@@ -652,16 +643,15 @@ module MyModule {
         
         ...
     }
-}
 ```
 ```json
 {
-    "identifier": "MyModule.FirstComponent.Event1",
+    "name": "c1.FirstComponent.Event1",
     "description": "This is the annotation for Event 1",
-    "severity": "activity high",
+    "severity": "ACTIVITY_HIGH",
     "formalParams": [
         {
-           "identifier": "arg1",
+           "name": "arg1",
             "description": "Argument 1",
             "type": {
                 "name": "U32",
@@ -672,7 +662,7 @@ module MyModule {
             "ref": false  
         }
     ],
-    "numericIdentifier": 257,
+    "identifier": 257,
     "formatString": "Event 1 occurred with argument {}",
 }
 ```
@@ -681,32 +671,30 @@ module MyModule {
 ## Record
 | Field | Description | Options | Required |
 | ----- | ----------- | ------- | -------- |
-| `identifier` | **String** qualified name of the record | Period separated **String** | true |
+| `name` | **String** qualified name of the record | Period separated **String** | true |
 | `description` | **String** annotation of record | **String** | true |
 | `type` | [Type Name](#type-names) the record | [Type Name](#type-names) | true |
 | `array` | **Boolean** specifying whether the record stores a variable number of elements | **Boolean** | false |
-| `numericIdentifier` | **Number** representing the numeric identifier of the record | **Number** | true |
+| `identifier` | **Number** representing the numeric identifier of the record | **Number** | true |
 
 Example FPP model with JSON representation:
 ```
-module MyModule {
-    active component FirstComponent {
-        @ Record 0: A variable number of F32 values
-        @ Implied id is 0x100
-        product record Record0: F32 array
+active component FirstComponent {
+    @ Record 0: A variable number of F32 values
+    @ Implied id is 0x100
+    product record Record0: F32 array
 
-        @ Record 1: A single U32 value
-        product record Record1: U32 id 0x102
-        
-        ...
-    }
+    @ Record 1: A single U32 value
+    product record Record1: U32 id 0x102
+    
+    ...
 }
 ```
 
 ```json
 [
     {
-        "identifier": "MyModule.FirstComponent.Record0",
+        "name": "c1.FirstComponent.Record0",
         "description": "Record 0: A variable number of F32 values",
         "type": {
             "name": "F32",
@@ -714,10 +702,10 @@ module MyModule {
             "size": 32
         },
         "array": true,
-        "numericIdentifier": 256 
+        "identifier": 256 
     },
     {
-        "identifier": "MyModule.FirstComponent.Record1",
+        "name": "c1.FirstComponent.Record1",
         "description": "Record 1: A single U32 value",
         "type": {
             "name": "U32",
@@ -726,7 +714,7 @@ module MyModule {
             "size": 32
         },
         "array": false,
-        "numericIdentifier": 258
+        "identifier": 258
     }      
 ]
 ```
@@ -734,47 +722,45 @@ module MyModule {
 ## Container
 | Field | Description | Options | Required |
 | ----- | ----------- | ------- | -------- |
-| `identifier` | **String** qualified name of the container | Period separated **String** | true |
+| `name` | **String** qualified name of the container | Period separated **String** | true |
 | `description` | **String** annotation of container | **String** | true |
-| `numericIdentifier` | **Number** representing the numeric identifier of the record | **Number** | true |
+| `identifier` | **Number** representing the numeric identifier of the record | **Number** | true |
 | `defaultPriority` | **Number** representing the downlink priority for the container | **Number** | false |
 
 Example FPP model with JSON representation:
 ```
-module MyModule {
-    active component FirstComponent {
-        @ Container 0
-        @ Implied id is 0x100
-        product container Container0
+active component FirstComponent {
+    @ Container 0
+    @ Implied id is 0x100
+    product container Container0
 
-        @ Container 1
-        product container Container1 id 0x102
+    @ Container 1
+    product container Container1 id 0x102
 
-        @ Container 2
-        @ Implied id is 0x103
-        product container Container2 default priority 10
+    @ Container 2
+    @ Implied id is 0x103
+    product container Container2 default priority 10
 
-        ...
-    }
+    ...
 }
 ```
 
 ```json
 [
     {
-       "identifier": "MyModule.FirstComponent.Container0",
+       "name": "c1.FirstComponent.Container0",
        "description": "Container 0\nImplied id is 0x100",
-       "numericIdentifier": 256,
+       "identifier": 256,
     },
     {
-        "identifier": "MyModule.FirstComponent.Container1",
+        "name": "c1.FirstComponent.Container1",
         "description": "Container 1",
-        "numericIdentifier": 258,
+        "identifier": 258,
     },
     {
-        "identifier": "MyModule.FirstComponent.Container2",
+        "name": "c1.FirstComponent.Container2",
         "description": "Container 2\nImplied id is 0x103",
-        "numericIdentifier": 3,
+        "identifier": 3,
         "defaultPriority": 259
     }
 ]
@@ -823,7 +809,7 @@ module MyModule {
     "enums": [
         {
             "kind": "enum",
-            "qualifiedName": "MyDeployment.M.C1.Status",
+            "qualifiedName": "M.FirstComponent.Status",
             "representationType": {
                 "name": "I32",
                 "kind": "integer",
@@ -835,13 +821,13 @@ module MyModule {
                 "NO": 1,
                 "MAYBE": 2
             },
-            "default": "MyDeployment.M.C1.Status.MAYBE"
+            "default": "M.FirstComponent.Status.MAYBE"
         }
     ],
     "arrays": [
         {
             "kind": "array",
-            "qualifiedName": "MyDeployment.M.C1.A1",
+            "qualifiedName": "M.FirstComponent.A1",
             "size": 3,
             "elementType": {
                 "name": "U8",
@@ -853,7 +839,7 @@ module MyModule {
         },
         {
             "kind": "array",
-            "qualifiedName": "MyDeployment.M.C1.A2",
+            "qualifiedName": "M.FirstComponent.A2",
             "size": 5,
             "elementType": {
                 "name": "string",
@@ -869,7 +855,7 @@ module MyModule {
             "members": {
                 "w": {
                     "type": {
-                        "name": "MyDeployment.M.C1.S1.w",
+                        "name": "M.FirstComponent.A1",
                         "kind": "qualifiedIdentifier"
                     },
                     "index": 0,
@@ -902,7 +888,7 @@ module MyModule {
         },
         {
             "kind": "struct",
-            "qualifiedName": "MyDeployment.M.C1.S2",
+            "qualifiedName": "M.FirstComponent.S2",
             "members": {
                 "x": {
                     "type": {
@@ -922,11 +908,11 @@ module MyModule {
         {
             "commandKind": "sync",
             "opcode": 257,
-            "identifier": "MyDeployment.MyModule.FirstComponent.SyncParams",
+            "name": "c1.FirstComponent.SyncParams",
             "description": "A sync command with parameters",
             "formalParams": [
                 {
-                    "identifier": "param1",
+                    "name": "param1",
                     "description": "Param 1",
                     "type": {
                         "name": "U32",
@@ -937,7 +923,7 @@ module MyModule {
                     "ref": false
                 },
                 {
-                    "identifier": "param2",
+                    "name": "param2",
                     "description": "Param 2",
                     "type": {
                         "name": "string",
@@ -951,23 +937,23 @@ module MyModule {
     ],
     "events": [
         {
-            "identifier": "MyDeployment.MyModule.FirstComponent.Event0",
+            "name": "c1.FirstComponent.Event0",
             "description": "This is the annotation for Event 0",
             "severity": "activity low",
             "formalParams": [
                 {
-                    "identifier": "",
+                    "name": "",
                     "description": "",
                     "type": {},
                     "ref": false
                 }
             ],
-            "numericIdentifier": 256,
+            "identifier": 256,
             "formatString": "Event 0 occurred",
             "throttle": ""
         },
         {
-            "identifier": "MyDeployment.MyModule.FirstComponent.Event1",
+            "name": "c1.FirstComponent.Event1",
             "description": "This is the annotation for Event 1",
             "severity": "activity high",
             "formalParams": [
@@ -983,21 +969,21 @@ module MyModule {
                     "ref": false  
                 }
             ],
-            "numericIdentifier": 257,
+            "identifier": 257,
             "formatString": "Event 1 occurred with argument {}",
             "throttle": ""
         }
     ],
     "telemetryChannels": [
         {
-            "identifier": "MyDeployment.MyModule.FirstComponent.Channel1",
+            "name": "c1.FirstComponent.Channel1",
             "description": "Telemetry channel 1",
             "type": {
                 "type": "F64",
                 "kind": "float",
                 "size": 64
             },
-            "numericIdentifier": 256,
+            "identifier": 256,
             "telemetryUpdate": "on change",
             "limit": {
                 "low": {
@@ -1015,7 +1001,7 @@ module MyModule {
     ],
     "parameters": [
         {
-            "identifier": "MyDeployment.MyModule.FirstComponent.Parameter1",
+            "name": "c1.FirstComponent.Parameter1",
             "description": "This is the annotation for Parameter 1",
             "type": {
                 "name": "U32",
@@ -1024,7 +1010,7 @@ module MyModule {
                 "size": 32
             },
             "default": 0,
-            "numericIdentifier": 256
+            "identifier": 256
         }
     ]
 }

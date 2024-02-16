@@ -458,20 +458,16 @@ Example JSON of a struct:
 
 Example FPP model with JSON representation:
 ```
-active component FirstComponent {
-    @ This is the annotation for Parameter 1
-    param Parameter1: U32 \
-        id 0x100 \
-        set opcode 0x101 \
-        save opcode 0x102
-
-    ...
-}
+@ This is the annotation for Parameter 1
+param Parameter1: U32 \
+    id 0x100 \
+    set opcode 0x101 \
+    save opcode 0x102
 ```
 
 ```json
 {
-    "name": "c1.FirstComponent.Parameter1",
+    "name": "c1.Parameter1",
     "description": "This is the annotation for Parameter 1",
     "type": {
         "name": "U32",
@@ -497,20 +493,16 @@ active component FirstComponent {
 
 Example FPP model with JSON representation:
 ```
-active component FirstComponent {
-    @ A sync command with parameters
-    sync command SyncParams(
-        param1: U32 @< Param 1
-        param2: string @< Param 2
-    ) opcode 0x100
-    
-    ...
-}
+@ A sync command with parameters
+sync command SyncParams(
+    param1: U32 @< Param 1
+    param2: string @< Param 2
+) opcode 0x100
 ```
 
 ```json
 {
-    "name": "c1.FirstComponent.SyncParams",
+    "name": "c1.SyncParams",
     "commandKind": "sync",
     "opcode": 256,
     "description": "A sync command with parameters",
@@ -553,22 +545,18 @@ active component FirstComponent {
 
 Example FPP model with JSON representation:
 ```
-active component FirstComponent {
-    @ Telemetry channel 1
-    telemetry Channel1: F64 \
-        id 0x100 \
-        update on change \
-        low { yellow -1, orange -2, red -3 } \
-        high { yellow 1, orange 2, red 3 }
-    
-    ...
-}
+@ Telemetry channel 1
+telemetry Channel1: F64 \
+    id 0x100 \
+    update on change \
+    low { yellow -1, orange -2, red -3 } \
+    high { yellow 1, orange 2, red 3 }
 ```
 
 ```json
 [
     {
-        "name": "c1.FirstComponent.Channel1",
+        "name": "c1.Channel1",
         "description": "Telemetry channel 1",
         "type": {
             "type": "F64",
@@ -607,20 +595,18 @@ active component FirstComponent {
 
 Example FPP model with JSON representation:
 ```
-active component FirstComponent {
-    @ This is the annotation for Event 0
-    event Event0 \
-        severity activity low \
-        id 0x100 \
-        format "Event 0 occurred"
-    
-    ...
-}
+@ This is the annotation for Event 0
+event Event0 \
+    severity activity low \
+    id 0x100 \
+    format "Event 0 occurred"
+
+...
 ```
 
 ```json
 {
-    "name": "c1.FirstComponent.Event0",
+    "name": "c1.Event0",
     "description": "This is the annotation for Event 0",
     "severity": "ACTIVITY_LOW",
     "formalParams": [],
@@ -631,22 +617,19 @@ active component FirstComponent {
 
 Example FPP model with JSON representation:
 ```
-    active component FirstComponent {
-        @ This is the annotation for Event 1
-        @ Sample output: "Event 1 occurred with argument 42"
-        event Event1(
-            arg1: U32 @< Argument 1
-        ) \
-            severity activity high \
-            id 0x101 \
-            format "Event 1 occurred with argument {}"
-        
-        ...
-    }
+@ This is the annotation for Event 1
+@ Sample output: "Event 1 occurred with argument 42"
+event Event1(
+    arg1: U32 @< Argument 1
+) \
+    severity activity high \
+    id 0x101 \
+    format "Event 1 occurred with argument {}"
+
 ```
 ```json
 {
-    "name": "c1.FirstComponent.Event1",
+    "name": "c1.Event1",
     "description": "This is the annotation for Event 1",
     "severity": "ACTIVITY_HIGH",
     "formalParams": [
@@ -679,22 +662,18 @@ Example FPP model with JSON representation:
 
 Example FPP model with JSON representation:
 ```
-active component FirstComponent {
-    @ Record 0: A variable number of F32 values
-    @ Implied id is 0x100
-    product record Record0: F32 array
+@ Record 0: A variable number of F32 values
+@ Implied id is 0x100
+product record Record0: F32 array
 
-    @ Record 1: A single U32 value
-    product record Record1: U32 id 0x102
-    
-    ...
-}
+@ Record 1: A single U32 value
+product record Record1: U32 id 0x102
 ```
 
 ```json
 [
     {
-        "name": "c1.FirstComponent.Record0",
+        "name": "c1.Record0",
         "description": "Record 0: A variable number of F32 values",
         "type": {
             "name": "F32",
@@ -705,7 +684,7 @@ active component FirstComponent {
         "identifier": 256 
     },
     {
-        "name": "c1.FirstComponent.Record1",
+        "name": "c1.Record1",
         "description": "Record 1: A single U32 value",
         "type": {
             "name": "U32",
@@ -729,36 +708,32 @@ active component FirstComponent {
 
 Example FPP model with JSON representation:
 ```
-active component FirstComponent {
-    @ Container 0
-    @ Implied id is 0x100
-    product container Container0
+@ Container 0
+@ Implied id is 0x100
+product container Container0
 
-    @ Container 1
-    product container Container1 id 0x102
+@ Container 1
+product container Container1 id 0x102
 
-    @ Container 2
-    @ Implied id is 0x103
-    product container Container2 default priority 10
-
-    ...
-}
+@ Container 2
+@ Implied id is 0x103
+product container Container2 default priority 10
 ```
 
 ```json
 [
     {
-       "name": "c1.FirstComponent.Container0",
+       "name": "c1.Container0",
        "description": "Container 0\nImplied id is 0x100",
        "identifier": 256,
     },
     {
-        "name": "c1.FirstComponent.Container1",
+        "name": "c1.Container1",
         "description": "Container 1",
         "identifier": 258,
     },
     {
-        "name": "c1.FirstComponent.Container2",
+        "name": "c1.Container2",
         "description": "Container 2\nImplied id is 0x103",
         "identifier": 3,
         "defaultPriority": 259
@@ -809,7 +784,7 @@ active component FirstComponent {
     "enums": [
         {
             "kind": "enum",
-            "qualifiedName": "M.FirstComponent.Status",
+            "qualifiedName": "M.C.Status",
             "representationType": {
                 "name": "I32",
                 "kind": "integer",
@@ -821,13 +796,13 @@ active component FirstComponent {
                 "NO": 1,
                 "MAYBE": 2
             },
-            "default": "M.FirstComponent.Status.MAYBE"
+            "default": "M.C.Status.MAYBE"
         }
     ],
     "arrays": [
         {
             "kind": "array",
-            "qualifiedName": "M.FirstComponent.A1",
+            "qualifiedName": "M.C.A1",
             "size": 3,
             "elementType": {
                 "name": "U8",
@@ -839,7 +814,7 @@ active component FirstComponent {
         },
         {
             "kind": "array",
-            "qualifiedName": "M.FirstComponent.A2",
+            "qualifiedName": "M.C.A2",
             "size": 5,
             "elementType": {
                 "name": "string",
@@ -855,7 +830,7 @@ active component FirstComponent {
             "members": {
                 "w": {
                     "type": {
-                        "name": "M.FirstComponent.A1",
+                        "name": "M.C.A1",
                         "kind": "qualifiedIdentifier"
                     },
                     "index": 0,
@@ -888,7 +863,7 @@ active component FirstComponent {
         },
         {
             "kind": "struct",
-            "qualifiedName": "M.FirstComponent.S2",
+            "qualifiedName": "M.C.S2",
             "members": {
                 "x": {
                     "type": {
@@ -908,7 +883,7 @@ active component FirstComponent {
         {
             "commandKind": "sync",
             "opcode": 257,
-            "name": "c1.FirstComponent.SyncParams",
+            "name": "c1.SyncParams",
             "description": "A sync command with parameters",
             "formalParams": [
                 {
@@ -937,7 +912,7 @@ active component FirstComponent {
     ],
     "events": [
         {
-            "name": "c1.FirstComponent.Event0",
+            "name": "c1.Event0",
             "description": "This is the annotation for Event 0",
             "severity": "activity low",
             "formalParams": [
@@ -953,7 +928,7 @@ active component FirstComponent {
             "throttle": ""
         },
         {
-            "name": "c1.FirstComponent.Event1",
+            "name": "c1.Event1",
             "description": "This is the annotation for Event 1",
             "severity": "activity high",
             "formalParams": [
@@ -976,7 +951,7 @@ active component FirstComponent {
     ],
     "telemetryChannels": [
         {
-            "name": "c1.FirstComponent.Channel1",
+            "name": "c1.Channel1",
             "description": "Telemetry channel 1",
             "type": {
                 "type": "F64",
@@ -1001,7 +976,7 @@ active component FirstComponent {
     ],
     "parameters": [
         {
-            "name": "c1.FirstComponent.Parameter1",
+            "name": "c1.Parameter1",
             "description": "This is the annotation for Parameter 1",
             "type": {
                 "name": "U32",

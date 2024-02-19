@@ -38,8 +38,8 @@ This document describes the format of FPP JSON dictionaries.
   - [Telemetry Channels](#telemetry-channels)
   - [Events](#events)
 - [Data Products](#data-products)
-  - [Record](#record)
-  - [Container](#container)
+  - [Records](#records)
+  - [Containers](#containers)
 - [Dictionaries](#dictionaries)
   - [Dictionary Metadata](#dictionary-metadata)
   - [Dictionary Content](#dictionary-content)
@@ -651,7 +651,7 @@ event Event1(
 ```
 
 # Data Products
-## Record
+## Records
 | Field | Description | Options | Required |
 | ----- | ----------- | ------- | -------- |
 | `name` | **String** qualified name of the record | Period separated **String** | true |
@@ -698,7 +698,7 @@ product record Record1: U32 id 0x102
 ]
 ```
 
-## Container
+## Containers
 | Field | Description | Options | Required |
 | ----- | ----------- | ------- | -------- |
 | `name` | **String** qualified name of the container | Period separated **String** | true |
@@ -771,6 +771,8 @@ product container Container2 default priority 10
 | `events` | Array of [Events](#events) | Array of [Events](#events) | true |
 | `telemetryChannels` | Array of [Telemetry Channels](#telemetry-channels) | Array of [Telemetry Channels](#telemetry-channels) | true |
 | `parameters` | Array of [Parameters](#parameters) | Array of [Parameters](#parameters) | true |
+| `records` | Array of [Records](#records) | Array of [Records](#records) | true |
+| `containers` | Array of [Containers](#containers) | Array of [Containers](#containers) | true |
 
 ```json
 {
@@ -986,6 +988,27 @@ product container Container2 default priority 10
             },
             "default": 0,
             "identifier": 256
+        }
+    ],
+    "records": [    
+        {
+            "name": "c1.Record1",
+            "description": "Record 1: A single U32 value",
+            "type": {
+                "name": "U32",
+                "kind": "integer",
+                "signed": false,
+                "size": 32
+            },
+            "array": false,
+            "identifier": 258
+        }      
+    ],
+    "containers": [
+        {
+        "name": "c1.Container0",
+        "description": "Container 0\nImplied id is 0x100",
+        "identifier": 256,
         }
     ]
 }

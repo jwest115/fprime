@@ -273,7 +273,7 @@ module M {
 | `type` | [Type Name](#type-names) of member | [Type Name](#type-names) | true |
 | `index` | **Number** index of the struct member | **Number** | true |
 | `size` | **Number** representing the size of the struct member | **Number** | false |
-| `formatSpecifier` | **String** format specifier | **String** | false |
+| `formatString` | **String** format specifier | **String** | false |
 
 ### Struct Type Definition
 | Field | Description | Options | Required |
@@ -313,7 +313,7 @@ module M {
                 "signed": false,
                 "size": 32
             },
-            "formatSpecifier": "the count is {}",
+            "formatString": "the count is {}",
             "index": 1
         },
         "y": {
@@ -845,7 +845,7 @@ product container Container2 default priority 10
                         "signed": false,
                         "size": 32
                     },
-                    "formatSpecifier": "the count is {}",
+                    "formatString": "the count is {}",
                     "index": 1
                 },
                 "y": {
@@ -872,7 +872,7 @@ product container Container2 default priority 10
                         "name": "string",
                         "kind": "string",
                     },
-                    "formatSpecifier": "the string is {}",
+                    "formatString": "the string is {}",
                     "index": 0
                 },
             },

@@ -764,9 +764,7 @@ product container Container2 default priority 10
 | Field | Description | Options | Required |
 | ----- | ----------- | ------- | -------- |
 | `metadata` | [Dictionary Metadata](#dictionary-metadata) | [Dictionary Metadata](#dictionary-metadata) | true |
-| `arrays` | Array of [Arrays](#array-type-definition) | Array of [Arrays](#array-type-definition) | true |
-| `enums` | Array of [Enums](#enumeration-type-definition) | Array of [Enums](#enumeration-type-definition) | true |
-| `structs` | Array of [Structs](#struct-type-definition-1) | Array of [Structs](#struct-type-definition-1) | true |
+| `typeDefinitions` | Array of [Arrays](#array-type-definition), [Enums](#enumeration-type-definition), and [Structs](#struct-type-definition-1) | Array of [Arrays](#array-type-definition), [Enums](#enumeration-type-definition), and [Structs](#struct-type-definition-1) | true |
 | `commands` | Array of [Commands](#commands) | Array of [Commands](#commands) | true |
 | `events` | Array of [Events](#events) | Array of [Events](#events) | true |
 | `telemetryChannels` | Array of [Telemetry Channels](#telemetry-channels) | Array of [Telemetry Channels](#telemetry-channels) | true |
@@ -783,7 +781,7 @@ product container Container2 default priority 10
         "libraryVersions": [],
         "dictionarySpecVersion": "1.0.0"
     },
-    "enums": [
+    "typeDefinitions": [
         {
             "kind": "enum",
             "qualifiedName": "M.C.Status",
@@ -799,9 +797,7 @@ product container Container2 default priority 10
                 "MAYBE": 2
             },
             "default": "M.C.Status.MAYBE"
-        }
-    ],
-    "arrays": [
+        },
         {
             "kind": "array",
             "qualifiedName": "M.C.A1",
@@ -823,9 +819,7 @@ product container Container2 default priority 10
                 "kind": "string",
             },
             "default": ["a", "b", "c", "d", "e"]
-        }
-    ],
-    "structs": [
+        },
         {
             "kind": "struct",
             "qualifiedName": "M.S1",

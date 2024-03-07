@@ -144,6 +144,7 @@ Example JSON of F64
 | ----- | ----------- | ------- | -------- |
 | `name` | **String** representing the FPP type name | bool | true
 | `kind` | **String** representing the kind of type | bool | true |
+| `size` | **Number** of bits supported by the data type  | 8 | true |
 
 ### Boolean Types
 - true
@@ -154,6 +155,7 @@ Example JSON of bool
 {
     "name": "bool",
     "kind": "bool",
+    "size": 8
 }
 ```
 
@@ -273,7 +275,7 @@ module M {
 | `type` | [Type Name](#type-names) of member | [Type Name](#type-names) | true |
 | `index` | **Number** index of the struct member | **Number** | true |
 | `size` | **Number** representing the size of the struct member | **Number** | false |
-| `formatString` | **String** format specifier | **String** | false |
+| `format` | **String** format specifier | **String** | false |
 
 ### Struct Type Definition
 | Field | Description | Options | Required |
@@ -313,7 +315,7 @@ module M {
                 "signed": false,
                 "size": 32
             },
-            "formatString": "the count is {}",
+            "format": "the count is {}",
             "index": 1
         },
         "y": {
@@ -454,7 +456,7 @@ Example JSON of a struct:
 | `description` | **String** annotation of parameter | **String** | true |
 | `type` | [Type Name](#type-names) of the parameter | [Type Name](#type-names) | true |
 | `default` | Default value (of type specified in `type`)  of the parameter | Value of type specified in `type` | false |
-| `identifier` | **Number** representing the numeric identifier of the parameter | **Number** | true |
+| `id` | **Number** representing the numeric identifier of the parameter | **Number** | true |
 
 Example FPP model with JSON representation:
 ```
@@ -476,7 +478,7 @@ param Parameter1: U32 \
         "size": 32
     },
     "default": 0,
-    "identifier": "256"
+    "id": "256"
 }
 ```
 
@@ -538,9 +540,9 @@ sync command SyncParams(
 | `name` | **String** qualified name of the telemetry channel | Period separated **String** | true |
 | `description` | **String** annotation of channel | **String** | true |
 | `type` | [Type Name](#type-names) the telemetry channel | [Type Name](#type-names) | true |
-| `identifier` | **Number** representing numeric identifier | **Number** | true |
+| `id` | **Number** representing numeric identifier | **Number** | true |
 | `telemetryUpdate` | **String** representing when the telemetry channel can update | always, on change | true |
-| `formatString` | **String** format with a single argument (the telemetry channel) | **String** | false |
+| `format` | **String** format with a single argument (the telemetry channel) | **String** | false |
 | `limit` | **JSON dictionary** consisting of low and high limits | **JSON dictionary** | false |
 
 Example FPP model with JSON representation:
@@ -563,7 +565,7 @@ telemetry Channel1: F64 \
             "kind": "float",
             "size": 64
         },
-        "identifier": 256,
+        "id": 256,
         "telemetryUpdate": "on change",
         "limit": {
             "low": {
@@ -588,8 +590,8 @@ telemetry Channel1: F64 \
 | `description` | **String** annotation of event | **String** | true |
 | `severity` | **String** representing severity of the event | ACTIVITY_HIGH, ACTIVITY_LOW, COMMAND, DIAGNOSTIC, FATAL, WARNING_HIGH, WARNING_LOW | true |
 | `formalParams` | Array of [Formal Parameters](#formal-parameters) | Array [Formal Parameters](#formal-parameters) | true |
-| `identifier` | **Number** representing the numeric identifier of the event | **Number** | true |
-| `formatString` | **String** format with event parameters as arguments | **String** | false |
+| `id` | **Number** representing the numeric identifier of the event | **Number** | true |
+| `format` | **String** format with event parameters as arguments | **String** | false |
 | `throttle` | **Number** representing the maximum number of times to emit the event before throttling it | **Number** | false |
 
 
@@ -610,8 +612,8 @@ event Event0 \
     "description": "This is the annotation for Event 0",
     "severity": "ACTIVITY_LOW",
     "formalParams": [],
-    "identifier": 256,
-    "formatString": "Event 0 occurred",
+    "id": 256,
+    "format": "Event 0 occurred",
 }
 ```
 
@@ -645,8 +647,8 @@ event Event1(
             "ref": false  
         }
     ],
-    "identifier": 257,
-    "formatString": "Event 1 occurred with argument {}",
+    "id": 257,
+    "format": "Event 1 occurred with argument {}",
 }
 ```
 
@@ -658,7 +660,7 @@ event Event1(
 | `description` | **String** annotation of record | **String** | true |
 | `type` | [Type Name](#type-names) the record | [Type Name](#type-names) | true |
 | `array` | **Boolean** specifying whether the record stores a variable number of elements | **Boolean** | false |
-| `identifier` | **Number** representing the numeric identifier of the record | **Number** | true |
+| `id` | **Number** representing the numeric identifier of the record | **Number** | true |
 
 Example FPP model with JSON representation:
 ```
@@ -681,7 +683,7 @@ product record Record1: U32 id 0x102
             "size": 32
         },
         "array": true,
-        "identifier": 256 
+        "id": 256 
     },
     {
         "name": "c1.Record1",
@@ -693,7 +695,7 @@ product record Record1: U32 id 0x102
             "size": 32
         },
         "array": false,
-        "identifier": 258
+        "id": 258
     }      
 ]
 ```
@@ -703,7 +705,7 @@ product record Record1: U32 id 0x102
 | ----- | ----------- | ------- | -------- |
 | `name` | **String** qualified name of the container | Period separated **String** | true |
 | `description` | **String** annotation of container | **String** | true |
-| `identifier` | **Number** representing the numeric identifier of the record | **Number** | true |
+| `id` | **Number** representing the numeric identifier of the record | **Number** | true |
 | `defaultPriority` | **Number** representing the downlink priority for the container | **Number** | false |
 
 Example FPP model with JSON representation:
@@ -725,17 +727,17 @@ product container Container2 default priority 10
     {
        "name": "c1.Container0",
        "description": "Container 0\nImplied id is 0x100",
-       "identifier": 256,
+       "id": 256,
     },
     {
         "name": "c1.Container1",
         "description": "Container 1",
-        "identifier": 258,
+        "id": 258,
     },
     {
         "name": "c1.Container2",
         "description": "Container 2\nImplied id is 0x103",
-        "identifier": 3,
+        "id": 3,
         "defaultPriority": 259
     }
 ]
@@ -839,7 +841,7 @@ product container Container2 default priority 10
                         "signed": false,
                         "size": 32
                     },
-                    "formatString": "the count is {}",
+                    "format": "the count is {}",
                     "index": 1
                 },
                 "y": {
@@ -866,7 +868,7 @@ product container Container2 default priority 10
                         "name": "string",
                         "kind": "string",
                     },
-                    "formatString": "the string is {}",
+                    "format": "the string is {}",
                     "index": 0
                 },
             },
@@ -919,8 +921,8 @@ product container Container2 default priority 10
                     "ref": false
                 }
             ],
-            "identifier": 256,
-            "formatString": "Event 0 occurred",
+            "id": 256,
+            "format": "Event 0 occurred",
             "throttle": ""
         },
         {
@@ -929,7 +931,7 @@ product container Container2 default priority 10
             "severity": "activity high",
             "formalParams": [
                 {
-                "identifier": "arg1",
+                "name": "arg1",
                     "description": "Argument 1",
                     "type": {
                         "name": "U32",
@@ -940,8 +942,8 @@ product container Container2 default priority 10
                     "ref": false  
                 }
             ],
-            "identifier": 257,
-            "formatString": "Event 1 occurred with argument {}",
+            "id": 257,
+            "format": "Event 1 occurred with argument {}",
             "throttle": ""
         }
     ],
@@ -954,7 +956,7 @@ product container Container2 default priority 10
                 "kind": "float",
                 "size": 64
             },
-            "identifier": 256,
+            "id": 256,
             "telemetryUpdate": "on change",
             "limit": {
                 "low": {
@@ -981,7 +983,7 @@ product container Container2 default priority 10
                 "size": 32
             },
             "default": 0,
-            "identifier": 256
+            "id": 256
         }
     ],
     "records": [    
@@ -995,14 +997,14 @@ product container Container2 default priority 10
                 "size": 32
             },
             "array": false,
-            "identifier": 258
+            "id": 258
         }      
     ],
     "containers": [
         {
-        "name": "c1.Container0",
-        "description": "Container 0\nImplied id is 0x100",
-        "identifier": 256,
+            "name": "c1.Container0",
+            "description": "Container 0\nImplied id is 0x100",
+            "id": 256,
         }
     ]
 }

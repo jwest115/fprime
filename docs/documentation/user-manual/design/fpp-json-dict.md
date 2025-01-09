@@ -171,7 +171,52 @@ Example JSON of qualified name
 }
 ```
 
+### Unknown Type Descriptors
+An _Unknown Type_ is a kind of _[Type Descriptor](#type-descriptors)_ that represents a type not known by FPP.
+
+| Field | Description | Options | Required | 
+| ----- | ----------- | ------- | -------- |
+| `name` | **String** representing the FPP type name |  `unknown` | true |
+| `kind` | **String** representing the kind of type | `unknown` | true | 
+
+Example JSON for unknown types
+```json
+{
+    "name": "unknown",
+    "kind": "unknown",
+}
+```
+
 ## Type Definitions
+
+### Abstract Type Definition
+
+| Field | Description | Options | Required | 
+| ----- | ----------- | ------- | -------- |
+| `kind` | The kind of type | `abstract` | true |
+| `qualifiedName` | Fully qualified name of element in FPP model | Period-separated **String** | true |
+| `type` | Type of abstract type | **[Unknown Type Descriptor](#unknown-type-descriptors)** | true
+| `annotation` | User-defined annotation | **String** | false |
+
+Example FPP model with JSON representation:
+```
+module M1 {
+    @ An abstract type A
+    type A
+}
+```
+
+```json
+{
+    "kind": "abstract",
+    "qualifiedName": "M1.A",
+    "type": {
+        "name": "unknown",
+        "kind": "unknown"
+    },
+    "annotation": "An abstract type A"
+}
+```
 
 ### Array Type Definition
 
@@ -907,7 +952,7 @@ product container Container2 default priority 10
       "annotation" : "Command with 2 args (array of strings and U32)"
     },
     {
-      "name" : "c1.PARAM1_PARAM_SET",
+      "name" : "c1.PARAM1_PRM_SET",
       "commandKind" : "set",
       "opcode" : 5001,
       "formalParams" : [
@@ -923,7 +968,7 @@ product container Container2 default priority 10
       "annotation" : "Parameter (struct)"
     },
     {
-      "name" : "c1.PARAM1_PARAM_SAVE",
+      "name" : "c1.PARAM1_PRM_SAVE",
       "commandKind" : "save",
       "opcode" : 5002,
       "formalParams" : [

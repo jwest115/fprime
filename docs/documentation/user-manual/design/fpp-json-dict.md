@@ -171,22 +171,6 @@ Example JSON of qualified name
 }
 ```
 
-### Unknown Type Descriptors
-An _Unknown Type_ is a kind of _[Type Descriptor](#type-descriptors)_ that represents a type not known by FPP.
-
-| Field | Description | Options | Required | 
-| ----- | ----------- | ------- | -------- |
-| `name` | **String** representing the FPP type name |  `unknown` | true |
-| `kind` | **String** representing the kind of type | `unknown` | true | 
-
-Example JSON for unknown types
-```json
-{
-    "name": "unknown",
-    "kind": "unknown",
-}
-```
-
 ## Type Definitions
 
 ### Abstract Type Definition
@@ -195,7 +179,6 @@ Example JSON for unknown types
 | ----- | ----------- | ------- | -------- |
 | `kind` | The kind of type | `abstract` | true |
 | `qualifiedName` | Fully qualified name of element in FPP model | Period-separated **String** | true |
-| `type` | Type of abstract type | **[Unknown Type Descriptor](#unknown-type-descriptors)** | true
 | `annotation` | User-defined annotation | **String** | false |
 
 Example FPP model with JSON representation:
@@ -210,10 +193,6 @@ module M1 {
 {
     "kind": "abstract",
     "qualifiedName": "M1.A",
-    "type": {
-        "name": "unknown",
-        "kind": "unknown"
-    },
     "annotation": "An abstract type A"
 }
 ```

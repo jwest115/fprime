@@ -494,7 +494,7 @@ Example JSON of a struct:
 | `kind` | **String** indicating that the kind of value is invalid | invalid | true |
 
 
-## Commands, Telemetry Channels, Events, and Parameters
+## Commands, Telemetry Channels, Telemetry Packet Groups, Events, and Parameters
 
 ### Formal Parameters
 
@@ -623,6 +623,22 @@ telemetry Channel1: F64 \
     }
 ]
 ```
+
+### Telemetry Packets
+| Field | Description | Options | Required |
+| ----- | ----------- | ------- | -------- |
+| `name` | Name of the telemetry packet | **String** | true |
+| `id` | Numeric identifier of the packet | **Number** | true |
+| `level` | Level of the packet | **Number** | true |
+| `members` | Telemetry Channels in the packet | Array of Fully Qualified Names of Telemetry Channels | true
+
+
+### Telemetry Packet Groups
+| Field | Description | Options | Required |
+| ----- | ----------- | ------- | -------- |
+| `name` | Name of the telemetry packet group | **String** | true |
+| `members` | Telemetry Packets in the group | Array of [Telemetry Packets](#telemetry-packets) | true |
+| `omitted` | Telemetry Channels omitted from the group | Array of Fully Qualified Names of Telemetry Channels | true |
 
 ### Events
 

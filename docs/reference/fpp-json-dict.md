@@ -497,7 +497,7 @@ Example JSON of a struct:
 | `kind` | **String** indicating that the kind of value is invalid | invalid | true |
 
 
-## Commands, Telemetry Channels, Telemetry Packet Groups, Events, and Parameters
+## Commands, Telemetry Channels, Events, and Parameters
 
 ### Formal Parameters
 
@@ -1033,7 +1033,7 @@ module M {
     param Parameter1: A \
       id 0x02 \
       set opcode 0x03 \
-      sav opcode 0x04
+      save opcode 0x04
 
     @ Event with one StatusEnum argument
     event Event1(

@@ -881,11 +881,11 @@ module M {
 
     telemetry packets Packets {
       packet P1 id 0 level 0 {
-        M.C.Channel0
-        M.C.Channel1
+        M.C1.Channel0
+        M.C1.Channel1
       }
     } omit {
-      M.C.Channel2
+      M.C1.Channel2
     }
   }
 }
@@ -901,13 +901,13 @@ module M {
           "id" : 0,
           "level" : 0,
           "members" : [
-            "M.C.Channel0",
-            "M.C.Channel1"
+            "M.C1.Channel0",
+            "M.C1.Channel1"
           ]
         }
       ],
       "omitted" : [
-        "M.C.Channel2"
+        "M.C1.Channel2"
       ]
     }
 ]
@@ -1261,7 +1261,7 @@ module M {
           "id" : 0,
           "level" : 0,
           "members" : [
-            "M.C.Channel1"
+            "M.C1.Channel1"
           ]
         }
       ],

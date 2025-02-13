@@ -44,9 +44,9 @@ This document describes the format of FPP JSON dictionaries.
 - [Data Products](#data-products)
     - [Records](#records)
     - [Containers](#containers)
-- [Telemetry Packet Groups](#telemetry-packet-groups) 
+- [Telemetry Packet Sets](#telemetry-packet-sets) 
   - [Telemetry Packets](#telemetry-packets) 
-  - [Telemetry Packet Groups](#telemetry-packet-groups-1)  
+  - [Telemetry Packet Sets](#telemetry-packet-sets-1)  
 - [Dictionaries](#dictionaries)
     - [Dictionary Metadata](#dictionary-metadata)
     - [Dictionary Content](#dictionary-content)
@@ -893,22 +893,22 @@ module M {
 ]
 ```
 
-## Telemetry Packet Groups
+## Telemetry Packet Sets
 
 ### Telemetry Packets
 | Field | Description | Options | Required |
 | ----- | ----------- | ------- | -------- |
 | `name` | Name of the telemetry packet | **String** | true |
 | `id` | Numeric identifier of the packet | **Number** | true |
-| `level` | Level of the packet | **Number** | true |
+| `group` | Packet group number | **Number** | true |
 | `members` | Telemetry Channels in the packet | Array of Fully Qualified Names of [Telemetry Channels](#telemetry-channels) | true
 
-### Telemetry Packet Groups
+### Telemetry Packet Sets
 | Field | Description | Options | Required |
 | ----- | ----------- | ------- | -------- |
-| `name` | Name of the telemetry packet group | **String** | true |
-| `members` | Telemetry Packets in the group | Array of [Telemetry Packets](#telemetry-packets) | true |
-| `omitted` | Telemetry Channels omitted from the group | Array of Fully Qualified Names of [Telemetry Channels](#telemetry-channels) | true |
+| `name` | Name of the telemetry packet set | **String** | true |
+| `members` | Telemetry Packets in the set | Array of [Telemetry Packets](#telemetry-packets) | true |
+| `omitted` | Telemetry Channels omitted from the set | Array of Fully Qualified Names of [Telemetry Channels](#telemetry-channels) | true |
 
 
 Example FPP model with JSON representation:
@@ -956,7 +956,7 @@ module M {
         {
           "name" : "P1",
           "id" : 0,
-          "level" : 0,
+          "group" : 0,
           "members" : [
             "M.C1.Channel0",
             "M.C1.Channel1"
@@ -1002,7 +1002,7 @@ module M {
 | `parameters` | Array of [Parameters](#parameters) | true |
 | `records` | Array of [Records](#records) | true |
 | `containers` | Array of [Containers](#containers) | true |
-| `telemetryPacketGroups` | Array of [Telemetry Packet Groups](#telemetry-packet-groups) | true |
+| `telemetryPacketSets` | Array of [Telemetry Packet Sets](#telemetry-packet-sets) | true |
 
 Example FPP model with JSON representation:
 ```
@@ -1309,14 +1309,14 @@ module M {
         "defaultPriority": 10
     }
   ],
-  "telemetryPacketGroups": [
+  "telemetryPacketSets": [
     {
       "name" : "Packets",
       "members" : [
         {
           "name" : "P1",
           "id" : 0,
-          "level" : 0,
+          "group" : 0,
           "members" : [
             "M.C1.Channel1"
           ]

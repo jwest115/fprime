@@ -977,7 +977,7 @@ module M {
 
 | Field | Description | Options | Required |
 | ----- | ----------- | ------- | -------- |
-| `deploymentName` | **String** representing the deployment name | **String** | true |
+| `deploymentName` | Fully qualified name of the topology | **String** | true |
 | `frameworkVersion` | **String** representing the F´ framework version (semantic versioning) | **String** | true |
 | `projectVersion` | **String** representing the project version (semantic versioning) | **String** | true |
 | `libraryVersions` | **Array of Strings** corresponding to the version (semantic versioning) of libraries used by the F´ project | **Array of Strings** | true
@@ -1088,7 +1088,7 @@ module M {
 ```json
 {
   "metadata": {
-    "deploymentName": "MyDeployment",
+    "deploymentName": "M.T",
     "frameworkVersion": "3.3.2",
     "projectVersion": "1.0.0",
     "libraryVersions": [],

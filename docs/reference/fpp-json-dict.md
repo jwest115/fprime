@@ -493,11 +493,11 @@ module M {
 
   }
 
-  instance C1: Component1 base id 0x100 \
+  instance c1: Component1 base id 0x100 \
     queue size 10
 
   topology T {
-    instance C1
+    instance c1
   }
 
 }
@@ -505,7 +505,7 @@ module M {
 JSON representation:
 ```json
 {
-    "name": "M.C1.SyncParams",
+    "name": "M.c1.SyncParams",
     "commandKind": "sync",
     "opcode": 257,
     "annotation": "A sync command with parameters",
@@ -563,11 +563,11 @@ module M {
 
   }
 
-  instance C1: Component1 base id 0x100 \
+  instance c1: Component1 base id 0x100 \
     queue size 10
 
   topology T {
-    instance C1
+    instance c1
   }
 
 }
@@ -577,7 +577,7 @@ module M {
 ```json
 [
     {
-        "name": "M.C1.Channel1",
+        "name": "M.c1.Channel1",
         "annotation": "Telemetry channel 1",
         "type": {
             "name": "F64",
@@ -631,11 +631,11 @@ module M {
 
   }
 
-  instance C1: Component1 base id 0x100 \
+  instance c1: Component1 base id 0x100 \
     queue size 10
 
   topology T {
-    instance C1
+    instance c1
   }
 
 }
@@ -644,7 +644,7 @@ module M {
 
 ```json
 {
-    "name": "M.C1.Event1",
+    "name": "M.c1.Event1",
     "annotation": "This is the annotation for Event 1",
     "severity": "ACTIVITY_LO",
     "formalParams": [
@@ -688,11 +688,11 @@ module M {
 
   }
 
-  instance C1: Component1 base id 0x100 \
+  instance c1: Component1 base id 0x100 \
     queue size 10
 
   topology T {
-    instance C1
+    instance c1
   }
 
 }
@@ -701,7 +701,7 @@ module M {
 
 ```json
 {
-    "name": "M.C1.Parameter1",
+    "name": "M.c1.Parameter1",
     "type": {
         "name": "U32",
         "kind": "integer",
@@ -739,11 +739,11 @@ module M {
 
   }
 
-  instance C1: Component1 base id 0x100 \
+  instance c1: Component1 base id 0x100 \
     queue size 10
 
   topology T {
-    instance C1
+    instance c1
   }
 
 }
@@ -753,7 +753,7 @@ module M {
 ```json
 [
     {
-        "name": "M.C1.Record0",
+        "name": "M.c1.Record0",
         "annotation": "Record 0: A variable number of F32 values",
         "type": {
             "name": "F32",
@@ -764,7 +764,7 @@ module M {
         "id": 261 
     },
     {
-        "name": "M.C1.Record1",
+        "name": "M.c1.Record1",
         "annotation": "Record 1: A single U32 value",
         "type": {
             "name": "U32",
@@ -804,11 +804,11 @@ module M {
 
   }
 
-  instance C1: Component1 base id 0x100 \
+  instance c1: Component1 base id 0x100 \
     queue size 10
 
   topology T {
-    instance C1
+    instance c1
   }
 
 }
@@ -818,17 +818,17 @@ module M {
 ```json
 [
     {
-       "name": "M.C1.Container0",
+       "name": "M.c1.Container0",
        "annotation": "Container 0",
        "id": 263,
     },
     {
-        "name": "M.C1.Container1",
+        "name": "M.c1.Container1",
         "annotation": "Container 1",
         "id": 264,
     },
     {
-        "name": "M.C1.Container2",
+        "name": "M.c1.Container2",
         "annotation": "Container 2",
         "id": 265,
         "defaultPriority": 259
@@ -839,6 +839,7 @@ module M {
 ## Telemetry Packet Sets
 
 ### Telemetry Packets
+
 | Field | Description | Options | Required |
 | ----- | ----------- | ------- | -------- |
 | `name` | Name of the telemetry packet | **String** | true |
@@ -847,6 +848,7 @@ module M {
 | `members` | Telemetry Channels in the packet | Array of Fully Qualified Names of [Telemetry Channels](#telemetry-channels) | true
 
 ### Telemetry Packet Sets
+
 | Field | Description | Options | Required |
 | ----- | ----------- | ------- | -------- |
 | `name` | Name of the telemetry packet set | **String** | true |
@@ -858,7 +860,7 @@ Example FPP model with JSON representation:
 ```
 module M {
 
-  active component C {
+  active component Component1 {
     @ Telemetry channel 0
     telemetry Channel0: U32 id 0x00
 
@@ -873,19 +875,19 @@ module M {
       format "{.3f}"
   }
 
-  instance C1: C base id 0x100 \
+  instance c1: Component1 base id 0x100 \
     queue size 10
 
   topology T {
-    instance C1
+    instance c1
 
     telemetry packets Packets {
       packet P1 id 0 level 0 {
-        M.C1.Channel0
-        M.C1.Channel1
+        M.c1.Channel0
+        M.c1.Channel1
       }
     } omit {
-      M.C1.Channel2
+      M.c1.Channel2
     }
   }
 }
@@ -901,13 +903,13 @@ module M {
           "id" : 0,
           "group" : 0,
           "members" : [
-            "M.C1.Channel0",
-            "M.C1.Channel1"
+            "M.c1.Channel0",
+            "M.c1.Channel1"
           ]
         }
       ],
       "omitted" : [
-        "M.C1.Channel2"
+        "M.c1.Channel2"
       ]
     }
 ]
@@ -1010,15 +1012,15 @@ module M {
 
   }
 
-  instance C1: Component1 base id 0x100 \
+  instance c1: Component1 base id 0x100 \
     queue size 10
 
   topology T {
-    instance C1
+    instance c1
 
     telemetry packets Packets {
       packet P1 id 0 level 0 {
-        M.C.Channel1
+        M.c.Channel1
       }
     }
   }
@@ -1108,7 +1110,7 @@ module M {
   ],
   "commands" : [
     {
-      "name" : "M.C1.CommandString",
+      "name" : "M.c1.CommandString",
       "commandKind" : "sync",
       "opcode" : 257,
       "formalParams" : [
@@ -1125,7 +1127,7 @@ module M {
       "annotation" : "A command with a single StringArray argument"
     },
     {
-      "name" : "M.C1.Parameter1_PRM_SET",
+      "name" : "M.c1.Parameter1_PRM_SET",
       "commandKind" : "set",
       "opcode" : 259,
       "formalParams" : [
@@ -1141,7 +1143,7 @@ module M {
       "annotation" : "Parameter (struct)"
     },
     {
-      "name" : "M.C1.Parameter1_PRM_SAVE",
+      "name" : "M.c1.Parameter1_PRM_SAVE",
       "commandKind" : "save",
       "opcode" : 260,
       "formalParams" : [
@@ -1151,7 +1153,7 @@ module M {
   ],
   "parameters" : [
     {
-      "name" : "M.C1.Parameter1",
+      "name" : "M.c1.Parameter1",
       "type" : {
         "name" : "M.A",
         "kind" : "qualifiedIdentifier"
@@ -1166,7 +1168,7 @@ module M {
   ],
   "events" : [
     {
-      "name" : "M.C1.Event1",
+      "name" : "M.c1.Event1",
       "severity" : "ACTIVITY_HI",
       "formalParams" : [
         {
@@ -1186,7 +1188,7 @@ module M {
   ],
   "telemetryChannels" : [
     {
-      "name" : "M.C1.Channel1",
+      "name" : "M.c1.Channel1",
       "type" : {
         "name" : "I32",
         "kind" : "integer",
@@ -1211,7 +1213,7 @@ module M {
   ],
   "records" : [
     {
-        "name": "M.C1.Record0",
+        "name": "M.c1.Record0",
         "annotation": "Record 0: A variable number of F32 values",
         "type": {
             "name": "F32",
@@ -1222,7 +1224,7 @@ module M {
         "id": 261 
     },
     {
-        "name": "M.C1.Record1",
+        "name": "M.c1.Record1",
         "annotation": "Record 1: A single U32 value",
         "type": {
             "name": "U32",
@@ -1236,17 +1238,17 @@ module M {
   ],
   "containers" : [
     {
-       "name": "M.C1.Container0",
+       "name": "M.c1.Container0",
        "annotation": "Container 0",
        "id": 263,
     },
     {
-        "name": "M.C1.Container1",
+        "name": "M.c1.Container1",
         "annotation": "Container 1",
         "id": 264,
     },
     {
-        "name": "M.C1.Container2",
+        "name": "M.c1.Container2",
         "annotation": "Container 2",
         "id": 265,
         "defaultPriority": 10
@@ -1261,7 +1263,7 @@ module M {
           "id" : 0,
           "group" : 0,
           "members" : [
-            "M.C1.Channel1"
+            "M.c1.Channel1"
           ]
         }
       ],

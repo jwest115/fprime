@@ -977,7 +977,7 @@ module M {
 
 | Field | Description | Options | Required |
 | ----- | ----------- | ------- | -------- |
-| `deploymentName` | Fully qualified name of the topology | **String** | true |
+| `deploymentName` | **String** representing the fully qualified name of the topology | **String** | true |
 | `frameworkVersion` | **String** representing the F´ framework version (semantic versioning) | **String** | true |
 | `projectVersion` | **String** representing the project version (semantic versioning) | **String** | true |
 | `libraryVersions` | **Array of Strings** corresponding to the version (semantic versioning) of libraries used by the F´ project | **Array of Strings** | true

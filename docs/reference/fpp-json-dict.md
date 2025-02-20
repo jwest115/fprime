@@ -22,6 +22,7 @@ This document describes the format of FPP JSON dictionaries.
     - [Struct Type Definition](#struct-type-definition)
         - [Struct Type Definition](#struct-type-definition_1)
         - [Struct Member](#struct-member-descriptor)
+    - [Type Alias Definition](#type-alias-definition)
 - [Values](#values)
     - [Primitive Integer Values](#primitive-integer-values)
     - [Floating-Point Values](#floating-point-values)

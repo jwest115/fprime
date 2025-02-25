@@ -1077,7 +1077,7 @@ module M {
 
     telemetry packets Packets {
       packet P1 id 0 level 0 {
-        M.c.Channel1
+        M.c1.Channel1
       }
     }
   }

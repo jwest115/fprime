@@ -1,8 +1,12 @@
+
+type FrequencyType = U32
+type PhaseType = F32
+
 @ Signal Generator Settings
 async command Settings(
-                                  Frequency: U32
+                                  Frequency: FrequencyType
                                   Amplitude: F32
-                                  Phase: F32
+                                  Phase: PhaseType
                                   SigType: Ref.SignalType
                                 ) \
   opcode 0x00

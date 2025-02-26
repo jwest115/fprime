@@ -1,5 +1,8 @@
 module Ref {
 
+  type AliasU32 = U32
+  type BuffRecvType = AliasU32
+
   @ Packet receive status
   enum PacketRecvStatus {
     PACKET_STATE_NO_PACKETS = 0
@@ -9,7 +12,7 @@ module Ref {
 
   @ Some Packet Statistics
   struct PacketStat {
-    BuffRecv: U32 @< Number of buffers received
+    BuffRecv: BuffRecvType @< Number of buffers received
     BuffErr: U32 @< Number of buffers received with errors
     PacketStatus: PacketRecvStatus @< Packet Status
   }

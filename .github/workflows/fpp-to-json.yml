@@ -27,12 +27,12 @@ jobs:
           pip3 install -r ./requirements.txt
         shell: bash
       - name: "Generate Ref Deployment"
-        working-directory: ./fprime/Ref
+        working-directory: ./Ref
         run: |
           fprime-util generate
         shell: bash
       - name: "Run fpp-to-json on Ref topology"
-        working-directory: ./fprime/Ref/Top
+        working-directory: ./Ref/Top
         run: |
           DEPENDENCIES=$(fpp-depend ../build-fprime-automatic-native/locs.fpp *.fpp)
           fpp-to-json ${DEPENDENCIES} *.fpp

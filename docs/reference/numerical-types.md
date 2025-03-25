@@ -29,7 +29,7 @@ the correct format specifier for a F32 is PRI_F64 as indicated in the table belo
 | U32     | uint32_t     | PRI_U32          | FW_HAS_32_BIT                         |
 | U64     | uint64_t     | PRI_U64          | FW_HAS_64_BIT                         |
 | F32     | float        | PRI_F64          | n/a                                   |
-| F64     | double       | PRI_F64          | FW_HAS_F64                            |
+| F64     | double       | PRI_F64          | n/a                            |
 
 Platform developers should include `stdint.h` or equivalent in their `PlatformTypes.h` to ensure F´ can construct a
 mapping from the C equivalents to the F´ type. If for some reason that header does not exist or does not define all

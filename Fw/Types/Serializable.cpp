@@ -182,7 +182,7 @@ SerializeStatus SerializeBufferBase::serialize(I64 val) {
 }
 #endif
 
-#if FW_HAS_F64 && FW_HAS_64_BIT
+#if FW_HAS_64_BIT
 
 SerializeStatus SerializeBufferBase::serialize(F64 val) {
     // floating point values need to be byte-swapped as well, so copy to U64 and use that routine
@@ -444,8 +444,6 @@ SerializeStatus SerializeBufferBase::deserialize(I64& val) {
 }
 #endif
 
-#if FW_HAS_F64
-
 SerializeStatus SerializeBufferBase::deserialize(F64& val) {
     // deserialize as 64-bit int to handle endianness
     U64 tempVal;
@@ -458,8 +456,6 @@ SerializeStatus SerializeBufferBase::deserialize(F64& val) {
 
     return FW_SERIALIZE_OK;
 }
-
-#endif
 
 SerializeStatus SerializeBufferBase::deserialize(bool& val) {
     // check for room

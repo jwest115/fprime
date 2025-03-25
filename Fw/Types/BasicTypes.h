@@ -62,9 +62,7 @@ typedef uint64_t U64;  //!< 64-bit unsigned integer
 typedef float F32;  //!< 32-bit floating point
 #define PRI_F64 "lf"
 
-#if FW_HAS_F64
 typedef double F64;  //!< 64-bit floating point
-#endif
 
 // Backwards-compatibility definitions
 typedef PlatformIntType NATIVE_INT_TYPE;

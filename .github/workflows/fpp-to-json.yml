@@ -22,10 +22,7 @@ jobs:
         with:
           fetch-depth: 0
           submodules: true
-      - name: "Install requirements.txt"
-        run: |
-          pip3 install -r ./requirements.txt
-        shell: bash
+      - uses: ./.github/actions/setup
       - name: "Generate Ref Deployment"
         working-directory: ./Ref
         run: |

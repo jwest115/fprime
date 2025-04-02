@@ -1,4 +1,4 @@
-name: "fpp-to-json Ref Test"
+name: "fpp-to-json Test"
 
 on:
   push:
@@ -14,7 +14,7 @@ on:
 
 jobs:
   fpp-to-json-ref:
-    name: Run fpp-to-json on the Ref deployment
+    name: Ref Deployment
     runs-on: ubuntu-22.04
     steps:
       - name: "Checkout F´ Repository"

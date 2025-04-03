@@ -1,0 +1,73 @@
+# Cross-compile https://github.com/fprime-community/fprime-system-reference
+
+name: "External Repo: System Reference"
+
+on:
+  push:
+    branches: [ devel, release/** ]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [ devel, release/** ]
+    paths-ignore:
+      - 'docs/**'
+      - '**.md'
+      - '.github/actions/spelling/**'
+      - '.github/ISSUE_TEMPLATE/**'
+
+env:
+  RPI_TOOLCHAIN_DIR: /tmp/rpi-toolchain
+
+jobs:
+  get-branch:
+    name: "Get target branch"
+    uses: ./.github/workflows/reusable-get-pr-branch.yml
+    with:
+      target_repository: fprime-community/fprime-system-reference
+  
+  cross-compilation:
+    name: "Cross Compilation"
+    runs-on: ubuntu-22.04
+    needs: get-branch
+    steps:
+      - name: "Checkout target repository"
+        uses: actions/checkout@v4
+        with:
+          submodules: false 
+          repository: fprime-community/fprime-system-reference
+          ref: ${{ needs.get-branch.outputs.target-branch }}
+      - name: "Overlay current F´ revision"
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          path: ./fprime
+          fetch-depth: 0
+      - name: "Checkout libcamera submodule"
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          path: ./libcamera
+      - uses: ./fprime/.github/actions/setup
+        with:
+          location: ./fprime
+      - name: "Install meson and ninja"
+        run: |
+          pip3 install meson ninja
+        shell: bash
+      - name: "Setup RPI Toolchain"
+        uses: fprime-community/setup-rpi-sysroot@main
+      - name: Build libcamera
+        run: |
+          meson setup build -Dprefix=${{ github.workspace }}/libcamera/build/ -Dpipelines=rpi/vc4 -Dipas=rpi/vc4 --cross-file ../libcamera-aarch32.txt
+          cd build
+          ninja
+          ninja install
+      # - name: "Generate build cache"
+      #   working-directory: ${{ inputs.build_location }}
+      #   run: |
+      #     fprime-util generate ${{ runner.debug == '1' && '--verbose' || '' }} ${{ inputs.target_platform }}
+      #   shell: bash
+      # - name: "Build"
+      #   working-directory: ${{ inputs.build_location }}
+      #   run: |
+      #     fprime-util build -j8 ${{ runner.debug == '1' && '--verbose' || '' }} ${{ inputs.target_platform }}
+      #   shell: bash

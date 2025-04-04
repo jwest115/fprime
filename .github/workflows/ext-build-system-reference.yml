@@ -58,6 +58,7 @@ jobs:
         uses: fprime-community/setup-rpi-sysroot@main
       - name: Build libcamera
         run: |
+          cd libcamera
           meson setup build -Dprefix=${{ github.workspace }}/libcamera/build/ -Dpipelines=rpi/vc4 -Dipas=rpi/vc4 --cross-file ../libcamera-aarch32.txt
           cd build
           ninja

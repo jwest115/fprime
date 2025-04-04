@@ -33,7 +33,8 @@ jobs:
       - name: "Checkout target repository"
         uses: actions/checkout@v4
         with:
-          submodules: false 
+          submodules: true
+          path: ./fprime-system-reference
           repository: fprime-community/fprime-system-reference
           ref: ${{ needs.get-branch.outputs.target-branch }}
       - name: "Overlay current F´ revision"
@@ -42,11 +43,6 @@ jobs:
           submodules: true
           path: ./fprime
           fetch-depth: 0
-      - name: "Checkout libcamera submodule"
-        uses: actions/checkout@v4
-        with:
-          submodules: true
-          path: ./libcamera
       - uses: ./fprime/.github/actions/setup
         with:
           location: ./fprime
@@ -59,7 +55,7 @@ jobs:
       - name: Build libcamera
         run: |
           cd libcamera
-          meson setup build -Dprefix=${{ github.workspace }}/libcamera/build/ -Dpipelines=rpi/vc4 -Dipas=rpi/vc4 --cross-file ../libcamera-aarch32.txt
+          meson setup build -Dprefix=${{ github.workspace }}./fprime-system-reference/libcamera/build/ -Dpipelines=rpi/vc4 -Dipas=rpi/vc4 --cross-file ../libcamera-aarch32.txt
           cd build
           ninja
           ninja install

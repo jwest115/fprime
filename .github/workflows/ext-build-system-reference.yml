@@ -47,7 +47,7 @@ jobs:
           location: ./fprime
       - name: "Install meson and ninja"
         run: |
-          pip3 install meson ninja
+          pip3 install meson ninja ply
         shell: bash
       - name: "Setup RPI Toolchain"
         uses: fprime-community/setup-rpi-sysroot@main

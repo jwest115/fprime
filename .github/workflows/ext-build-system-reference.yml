@@ -51,7 +51,8 @@ jobs:
         shell: bash
       - name: "Setup RPI Toolchain"
         uses: fprime-community/setup-rpi-sysroot@main
-        run:
+      - name: "Add RPI Toolchain to PATH"
+        run: |
           echo "export PATH=$RPI_TOOLS:$PATH" >> $GITHUB_ENV
       - name: Build libcamera
         run: |

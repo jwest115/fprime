@@ -34,7 +34,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: true
-          path: ./fprime-system-reference
           repository: fprime-community/fprime-system-reference
           ref: ${{ needs.get-branch.outputs.target-branch }}
       - name: "Overlay current F´ revision"

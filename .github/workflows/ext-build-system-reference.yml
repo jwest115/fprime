@@ -73,5 +73,5 @@ jobs:
       - name: "Build"
         working-directory: SystemReference
         run: |
-          fprime-util build raspberrypi --j8
+          fprime-util build raspberrypi
         shell: bash

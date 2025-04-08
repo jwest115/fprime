@@ -16,7 +16,7 @@ on:
 
 env:
   RPI_TOOLCHAIN_DIR: /tmp/rpi-toolchain
-  PKG_CONFIG_PATH: ${{ github.workspace }}/libcamera/lib/pkconfig
+  PKG_CONFIG_PATH: ${{ github.workspace }}/libcamera/build/lib/pkconfig
 
 jobs:
   get-branch:

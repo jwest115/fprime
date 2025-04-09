@@ -23,8 +23,8 @@ jobs:
     name: "Get target branch"
     uses: ./.github/workflows/reusable-get-pr-branch.yml
     with:
-      target_repository: fprime-community/fprime-system-reference
-  
+      target_repository: jwest115/fprime-system-reference
+      default_target_ref: telem-packets
   cross-compilation:
     name: "Cross Compilation"
     runs-on: ubuntu-22.04
@@ -34,7 +34,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: true
-          repository: fprime-community/fprime-system-reference
+          repository: jwest115/fprime-system-reference
           ref: ${{ needs.get-branch.outputs.target-branch }}
       - name: "Overlay current F´ revision"
         uses: actions/checkout@v4

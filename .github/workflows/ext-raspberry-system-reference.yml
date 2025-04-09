@@ -4,15 +4,15 @@ name: "External Repo: System Reference"
 
 on:
   push:
-    branches: [ devel, release/**, ci/add-system-ref ]
-  # pull_request:
-  #   # The branches below must be a subset of the branches above
-  #   branches: [ devel, release/** ]
-  #   paths-ignore:
-  #     - 'docs/**'
-  #     - '**.md'
-  #     - '.github/actions/spelling/**'
-  #     - '.github/ISSUE_TEMPLATE/**'
+    branches: [ devel, release/** ]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [ devel, release/** ]
+    paths-ignore:
+      - 'docs/**'
+      - '**.md'
+      - '.github/actions/spelling/**'
+      - '.github/ISSUE_TEMPLATE/**'
 
 env:
   RPI_TOOLCHAIN_DIR: /tmp/rpi-toolchain
@@ -23,8 +23,7 @@ jobs:
     name: "Get target branch"
     uses: ./.github/workflows/reusable-get-pr-branch.yml
     with:
-      target_repository: jwest115/fprime-system-reference
-      default_target_ref: telem-packets
+      target_repository: fprime-community/fprime-system-reference
   
   cross-compilation:
     name: "Cross Compilation"
@@ -35,8 +34,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: true
-          repository: jwest115/fprime-system-reference
-          ref: telem-packets
+          repository: fprime-community/fprime-system-reference
+          ref: ${{ needs.get-branch.outputs.target-branch }}
       - name: "Overlay current F´ revision"
         uses: actions/checkout@v4
         with:
@@ -65,13 +64,11 @@ jobs:
           cd build
           ninja
           ninja install
-      - name: "Generate build cache"
+      - name: "Generate System Reference build cache"
         working-directory: SystemReference
         run: |
           fprime-util generate raspberrypi
-        shell: bash
-      - name: "Build"
+      - name: "Build System Reference"
         working-directory: SystemReference
         run: |
           fprime-util build raspberrypi
-        shell: bash

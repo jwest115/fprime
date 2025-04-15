@@ -24,6 +24,7 @@ jobs:
     uses: ./.github/workflows/reusable-get-pr-branch.yml
     with:
       target_repository: fprime-community/fprime-system-reference
+      default_target_ref: main
   
   cross-compilation:
     name: "Cross Compilation"

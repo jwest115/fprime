@@ -698,7 +698,7 @@ namespace Svc {
 
       //! Record a completed command
       void commandComplete(
-          const U32 opCode //!< The opcode
+          const FwOpcodeType opCode //!< The opcode
       );
 
       //! Record a sequence complete event
@@ -710,7 +710,7 @@ namespace Svc {
       //! Record an error in executing a sequence command
       void commandError(
           const U32 number, //!< The command number
-          const U32 opCode, //!< The command opcode
+          const FwOpcodeType opCode, //!< The command opcode
           const U32 error //!< The error code
       );
 

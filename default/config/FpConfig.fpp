@@ -38,6 +38,8 @@ type FwTaskPriorityType = PlatformTaskPriorityType
 @ The type of queue priorities used.
 type FwQueuePriorityType = PlatformQueuePriorityType
 
+@ The base id type.
+type FwBaseIdType = U32
 
 ####
 # GDS type aliases:
@@ -45,7 +47,7 @@ type FwQueuePriorityType = PlatformQueuePriorityType
 ####
 
 @ The type of a telemetry channel identifier
-type FwChanIdType = U32
+type FwChanIdType = FwBaseIdType
 
 @ The type of a data product identifier
 type FwDpIdType = U32
@@ -54,13 +56,13 @@ type FwDpIdType = U32
 type FwDpPriorityType = U32
 
 @ The type of an event identifier
-type FwEventIdType = U32
+type FwEventIdType = FwBaseIdType
 
 @ The type of a command opcode
-type FwOpcodeType = U32
+type FwOpcodeType = FwBaseIdType
 
 @ The type of a com packet descriptor
-type FwPacketDescriptorType = U32
+type FwPacketDescriptorType = FwBaseIdType
 
 @ The type of a parameter identifier
 type FwPrmIdType = U32

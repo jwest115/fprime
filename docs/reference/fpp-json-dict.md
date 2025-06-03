@@ -15,6 +15,7 @@ This document describes the format of FPP JSON dictionaries.
     - [String Type Descriptors](#string-type-descriptors)
         - [String Types](#string-types)
     - [Qualified Identifier Type Descriptors](#qualified-identifier-type-descriptors)
+- [Constants](#constants)
 - [Type Definitions](#type-definitions)
     - [Array Type Definition](#array-type-definition)
     - [Enumeration Type Definition](#enumeration-type-definition)
@@ -29,6 +30,7 @@ This document describes the format of FPP JSON dictionaries.
     - [Boolean Values](#boolean-values)
     - [String Values](#string-values)
     - [Array Values](#array-values)
+    - [Constant Values](#constant-values)
     - [Enumeration Values](#enumeration-values)
     - [Struct Values](#struct-values)
     - [Invalid Values](#invalid-values)
@@ -175,6 +177,39 @@ Example JSON of qualified name
 }
 ```
 
+## Constants
+
+| Field | Description | Options | Required | 
+| ----- | ----------- | ------- | -------- |
+| `kind` | The kind of type | `constant` | true |
+| `qualifiedName` | Fully qualified name of element in FPP model | Period-separated **String** | true |
+| `type` | The type of the constant value | **[Type Descriptor](#type-descriptors)** | true
+| `value` | Value associated with the constant | **[Constant Value](#constant-values)** | true |
+| `annotation` | User-defined annotation | **String** | false |
+
+Example FPP model with JSON representation:
+```
+module M1 {
+  @ Constant with value 1
+  constant C = 1
+}
+```
+
+```json
+{
+  "kind" : "constant",
+  "qualifiedName" : "M1.C",
+  "type" : {
+    "name" : "U64",
+    "kind" : "integer",
+    "size" : 64,
+    "signed" : false
+  },
+  "value" : 1,
+  "annotation" : "Constant with value 1"
+}
+```
+
 ## Type Definitions
 
 ### Array Type Definition
@@ -185,7 +220,7 @@ Example JSON of qualified name
 | `qualifiedName` | Fully qualified name of element in FPP model | Period-separated **String** | true |
 | `size` | Size of the data structure | **Number** | true |
 | `elementType` | The type of the array's elements | **[Type Descriptor](#type-descriptors)** | true
-| `default` | Default array value | Value of type specified in `elementType` | true |
+| `default` | Default array value |  **[Array Value](#array-values)**  | true |
 | `annotation` | User-defined annotation | **String** | false |
 
 Example FPP model with JSON representation:
@@ -282,7 +317,7 @@ module M1 {
 | `kind` | The kind of type | `struct` | true |
 | `qualifiedName` | Fully qualified name of element in FPP model | Period-separated **String** | true |
 | `members` | The members of the struct | JSON dictionary of Member Name (key) to [Struct Member Descriptor](#struct-member-descriptor) (value) | true |
-| `default` | The default value of the struct | JSON dictionary of Member Name (key) to default value (value) | true |
+| `default` | The default value of the struct | JSON dictionary of Member Name (key) to **[Struct Value](#struct-values)** (value) | true |
 | `annotation` | User-defined annotation | **String** extracted from FPP model | false |
 
 #### Struct Member Descriptor
@@ -452,6 +487,10 @@ Example JSON of an array of type U32 consisting of 10 elements
 ```json
 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 ```
+
+### Constant Values
+Constant values include [Primitive Integer](#primitive-integer-values), [Floating-Point](#floating-point-values), 
+[String](#string-values), and [Boolean](#boolean-values) values.
 
 ### Enumeration Values
 String qualified identifier name of enumeration value

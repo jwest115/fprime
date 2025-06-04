@@ -1037,6 +1037,7 @@ module M {
 | ----- | ------- | -------- |
 | `metadata` | [Dictionary Metadata](#dictionary-metadata) | true |
 | `typeDefinitions` | Array of [Type Definitions](#type-definitions)| true |
+| `constants` | Array of [Constants](#constants)| true |
 | `commands` | Array of [Commands](#commands) | true |
 | `events` | Array of [Events](#events) | true |
 | `telemetryChannels` | Array of [Telemetry Channels](#telemetry-channels) | true |
@@ -1204,6 +1205,7 @@ module M {
       }
     }
   ],
+  "constants": [],
   "commands" : [
     {
       "name" : "M.c1.CommandString",

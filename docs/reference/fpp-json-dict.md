@@ -256,7 +256,7 @@ module M1 {
 | `qualifiedName` | Fully qualified name of element in FPP model | Period-separated **String** | true |
 | `representationType` | Type of the enumerated values | **[Type Descriptor](#type-descriptors)** | true |
 | `enumeratedConstants` | The enumerated constants | JSON Dictionary of enumerated constants (keys) to [Enumerated Constant Descriptor](#enumerated-constant-descriptors) (values) | true |
-| `default` | Qualified name of the enumeration's default value | **String** | true |
+| `default` | Qualified name of the enumeration's default value | **[Enumeration Value](#enumeration-values)** | true |
 | `annotation` | User-defined annotation | **String** | false |
 
 #### Enumerated Constant Descriptors

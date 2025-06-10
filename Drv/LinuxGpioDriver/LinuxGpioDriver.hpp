@@ -67,7 +67,7 @@ class LinuxGpioDriver final : public LinuxGpioDriverComponentBase {
 
     //! \brief start interrupt detection thread
     //!
-    Drv::GpioStatus start(const FwSizeType priority = Os::Task::TASK_DEFAULT,
+    Drv::GpioStatus start(const FwTaskPriorityType priority = Os::Task::TASK_PRIORITY_DEFAULT,
                           const FwSizeType stackSize = Os::Task::TASK_DEFAULT,
                           const FwSizeType cpuAffinity = Os::Task::TASK_DEFAULT,
                           const PlatformUIntType identifier = static_cast<PlatformUIntType>(Os::Task::TASK_DEFAULT));
@@ -80,7 +80,7 @@ class LinuxGpioDriver final : public LinuxGpioDriverComponentBase {
     //!
     void join();
 
-  PRIVATE:
+  private:
     //! \brief helper to setup a line handle (read or write).
     Os::File::Status setupLineHandle(const PlatformIntType chip_descriptor,
                                      const U32 gpio,

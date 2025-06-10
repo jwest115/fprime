@@ -1,3 +1,7 @@
+include_guard()
+# Create a target to act as an interface to all fprime configuration modules
+set(FPRIME__INTERNAL_CONFIG_TARGET_NAME "__fprime_config")
+add_library(${FPRIME__INTERNAL_CONFIG_TARGET_NAME} INTERFACE)
 ####
 # Function `fprime__internal_process_configuration_sources`:
 #
@@ -83,12 +87,14 @@ function(fprime__internal_process_configuration_source_set MODULE_NAME SOURCE_SE
             fprime_cmake_debug_message("[config] Overriding ${DESTINATION} with ${SOURCE}")
             file(COPY_FILE "${SOURCE}" "${DESTINATION}" ONLY_IF_DIFFERENT)
             list(APPEND NEW_DEPENDS "${DESTINATION_MODULE}")
+            set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${SOURCE}")
         # If the source is new, move it to the binary directory
         else()
             fprime_cmake_debug_message("[config] Initial config ${DESTINATION} from ${SOURCE}")
             list(APPEND RETURNED_SOURCES "${DESTINATION}")
             file(MAKE_DIRECTORY "${DESTINATION_DIRECTORY}")
             file(COPY_FILE "${SOURCE}" "${DESTINATION}" ONLY_IF_DIFFERENT)
+            set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${SOURCE}")
         endif()
     endforeach()
     set(PROCESSED_SOURCES "${RETURNED_SOURCES}" PARENT_SCOPE)

@@ -428,7 +428,7 @@ namespace Svc {
     FW_ASSERT(status == Fw::FW_SERIALIZE_OK, status);
     // Zero-extend the two-byte AMPCS opcode by (sizeof(FwOpcodeType) - 2) bytes
     FW_ASSERT(sizeof(FwOpcodeType) >= 2);
-    U16 sizeOfZeros = 0;
+    U32 sizeOfZeros = 0;
     const FwIndexType bytesToExtend = sizeof(FwOpcodeType) - 2;
     const U8 zeros = 0;
     for(FwIndexType i = 0; i < bytesToExtend; i++){

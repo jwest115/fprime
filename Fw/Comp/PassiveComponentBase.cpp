@@ -44,12 +44,12 @@ namespace Fw {
     }
 
     void PassiveComponentBase ::
-      setIdBase(const FwBaseIdType idBase)
+      setIdBase(const FwIdType idBase)
     {
       this->m_idBase = idBase;
     }
 
-    FwBaseIdType PassiveComponentBase ::
+    FwIdType PassiveComponentBase ::
       getIdBase() const
     {
       return this->m_idBase;

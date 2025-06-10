@@ -104,8 +104,8 @@ namespace Svc {
               std::cout << "readLine: " << buf << std::endl;
               char textStr[512];
               snprintf(textStr, sizeof(textStr),
-                      "EVENT: (%llu) (%d:%d,%d) %s: %s",
-                       static_cast<U64>(id),timeTag.getTimeBase(),timeTag.getSeconds(),timeTag.getUSeconds(),severityString,text.toChar());
+                      "EVENT: (%" PRI_FwEventIdType ") (%d:%d,%d) %s: %s",
+                       id,timeTag.getTimeBase(),timeTag.getSeconds(),timeTag.getUSeconds(),severityString,text.toChar());
               ASSERT_STREQ(textStr,buf);
               (void) Fw::StringUtils::string_copy(oldLine, buf, static_cast<FwSizeType>(sizeof(oldLine)));
           }
@@ -145,8 +145,8 @@ namespace Svc {
               else {
                   char textStr[512];
                   snprintf(textStr, sizeof(textStr),
-                          "EVENT: (%llu) (%d:%d,%d) %s: %s",
-                           static_cast<U64>(id),timeTag.getTimeBase(),timeTag.getSeconds(),timeTag.getUSeconds(),severityString,text.toChar());
+                          "EVENT: (%" PRI_FwEventIdType ") (%d:%d,%d) %s: %s",
+                           id,timeTag.getTimeBase(),timeTag.getSeconds(),timeTag.getUSeconds(),severityString,text.toChar());
                   ASSERT_EQ(0,strcmp(textStr,buf));
               }
           }
@@ -207,8 +207,8 @@ namespace Svc {
               std::cout << "readLine: " << buf << std::endl;
               char textStr[512];
               snprintf(textStr, sizeof(textStr),
-                      "EVENT: (%llu) (%d:%d,%d) %s: %s",
-                       static_cast<U64>(id),timeTag.getTimeBase(),timeTag.getSeconds(),timeTag.getUSeconds(),severityString,text.toChar());
+                      "EVENT: (%" PRI_FwEventIdType ") (%d:%d,%d) %s: %s",
+                       id,timeTag.getTimeBase(),timeTag.getSeconds(),timeTag.getUSeconds(),severityString,text.toChar());
               ASSERT_EQ(0,strcmp(textStr,buf));
               (void) Fw::StringUtils::string_copy(oldLine, buf, static_cast<FwSizeType>(sizeof(oldLine)));
           }
@@ -373,8 +373,8 @@ namespace Svc {
               std::cout << "readLine: " << buf << std::endl;
               char textStr[512];
               snprintf(textStr, sizeof(textStr),
-                    "EVENT: (%llu) (%d:%d,%d) %s: %s",
-                    static_cast<U64>(id),timeTag.getTimeBase(), timeTag.getSeconds(), timeTag.getUSeconds(), severityString, text.toChar());
+                    "EVENT: (%" PRI_FwEventIdType ") (%d:%d,%d) %s: %s",
+                    id,timeTag.getTimeBase(), timeTag.getSeconds(), timeTag.getUSeconds(), severityString, text.toChar());
               ASSERT_EQ(0, strcmp(textStr, buf));
           }
       }

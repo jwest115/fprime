@@ -270,10 +270,10 @@ void TlmChanTester::dumpTlmEntry(TlmChan::TlmEntry* entry) {
     printf(
         "Entry "
         " Ptr: %p"
-        " id: 0x%08llX"
-        " bucket: %llu"
+        " id: 0x%" PRI_FwChanIdType
+        " bucket: %" PRI_FwChanIdType
         " next: %p\n",
-        static_cast<void*>(entry), static_cast<U64>(entry->id), static_cast<U64>(entry->bucketNo), static_cast<void*>(entry->next));
+        static_cast<void*>(entry), entry->id, entry->bucketNo, static_cast<void*>(entry->next));
     
 }
 
@@ -281,7 +281,7 @@ void TlmChanTester::dumpHash() {
     //        printf("**Buffer 0\n");
     for (FwChanIdType slot = 0; slot < TLMCHAN_NUM_TLM_HASH_SLOTS; slot++) {
 
-        printf("Slot: %llu\n", static_cast<U64>(slot));
+        printf("Slot: %" PRI_FwChanIdType "\n", slot);
 
         if (this->component.m_tlmEntries[0].slots[slot]) {
             TlmChan::TlmEntry* entry = component.m_tlmEntries[0].slots[slot];

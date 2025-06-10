@@ -181,7 +181,6 @@ Example JSON of qualified name
 
 | Field | Description | Options | Required | 
 | ----- | ----------- | ------- | -------- |
-| `kind` | The kind of type | `constant` | true |
 | `qualifiedName` | Fully qualified name of element in FPP model | Period-separated **String** | true |
 | `type` | The type of the constant value | **[Type Descriptor](#type-descriptors)** | true
 | `value` | Value associated with the constant | **[Constant Value](#constant-values)** | true |
@@ -197,7 +196,6 @@ module M1 {
 
 ```json
 {
-  "kind" : "constant",
   "qualifiedName" : "M1.C",
   "type" : {
     "name" : "U64",

@@ -280,9 +280,7 @@ void TlmChanTester::dumpTlmEntry(TlmChan::TlmEntry* entry) {
 void TlmChanTester::dumpHash() {
     //        printf("**Buffer 0\n");
     for (FwChanIdType slot = 0; slot < TLMCHAN_NUM_TLM_HASH_SLOTS; slot++) {
-
         printf("Slot: %" PRI_FwChanIdType "\n", slot);
-
         if (this->component.m_tlmEntries[0].slots[slot]) {
             TlmChan::TlmEntry* entry = component.m_tlmEntries[0].slots[slot];
             for (FwChanIdType bucket = 0; bucket < TLMCHAN_HASH_BUCKETS; bucket++) {

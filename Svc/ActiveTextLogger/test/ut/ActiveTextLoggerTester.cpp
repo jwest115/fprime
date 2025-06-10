@@ -369,12 +369,12 @@ namespace Svc {
       while(logStream) {
           char buf[256];
           logStream.getline(buf, 256);
-            if (logStream) {
+          if (logStream) {
               std::cout << "readLine: " << buf << std::endl;
               char textStr[512];
               snprintf(textStr, sizeof(textStr),
-                    "EVENT: (%" PRI_FwEventIdType ") (%d:%d,%d) %s: %s",
-                    id,timeTag.getTimeBase(), timeTag.getSeconds(), timeTag.getUSeconds(), severityString, text.toChar());
+                       "EVENT: (%" PRI_FwEventIdType ") (%d:%d,%d) %s: %s",
+                       id,timeTag.getTimeBase(), timeTag.getSeconds(), timeTag.getUSeconds(), severityString, text.toChar());
               ASSERT_EQ(0, strcmp(textStr, buf));
           }
       }

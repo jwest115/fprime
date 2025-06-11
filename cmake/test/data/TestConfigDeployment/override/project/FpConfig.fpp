@@ -50,6 +50,7 @@ type FwQueuePriorityType = PlatformQueuePriorityType
 # Used for the project to override types shared with GDSes and other remote systems.
 ####
 
+@ The id type.
 type FwIdType = U32
 
 @ The type of a data product identifier

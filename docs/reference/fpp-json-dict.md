@@ -186,6 +186,11 @@ Example JSON of qualified name
 | `value` | Value associated with the constant | **[Constant Value](#constant-values)** | true |
 | `annotation` | User-defined annotation | **String** | false |
 
+Type information for integer constant dictionary entries is determined by
+checking the sign of a constant and will always default to the maximum integer size (64 bits):
+- If the constant is positive, the type of the constant is U64.
+- If the constant is negative, the type of the constant is I64.
+  
 Example FPP model with JSON representation:
 ```
 module M1 {

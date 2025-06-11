@@ -63,7 +63,7 @@ argument field:
 
 Field             | Size in Bytes                    | Value
 ----------------- | -------------------------------- | -----------------
-Packet Descriptor | sizeof(FwPacketDescriptorType)   | `Fw::ComPacket::FW_PACKET_COMMAND`
+Packet Descriptor | sizeof(FwPacketDescriptorType)   | `Fw::ComPacketType::FW_PACKET_COMMAND`
 Opcode            | sizeof(FwOpcodeType)             | The opcode stored in bytes 0-1 of the serial record, zero-extended to sizeof(FwOpcodeType) bytes
 Arguments         | Variable                         | Bytes 2-end of the serial record
 

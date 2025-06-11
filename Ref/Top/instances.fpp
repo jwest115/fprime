@@ -181,7 +181,7 @@ module Ref {
 
   instance comStub: Svc.ComStub base id 0x4F00
 
-  instance linuxTimer: Svc.LinuxTimer base id 0x5000
+  instance linuxTimer: Svc.LinuxTimer base id 0x5300
 
 }
 

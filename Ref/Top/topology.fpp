@@ -62,6 +62,7 @@ module Ref {
     instance typeDemo
     instance systemResources
     instance dpCat
+    instance dpDemo
     instance dpMgr
     instance dpWriter
     instance dpBufferManager
@@ -147,6 +148,7 @@ module Ref {
       rateGroup2Comp.RateGroupMemberOut[1] -> sendBuffComp.SchedIn
       rateGroup2Comp.RateGroupMemberOut[2] -> SG3.schedIn
       rateGroup2Comp.RateGroupMemberOut[3] -> SG4.schedIn
+      rateGroup2Comp.RateGroupMemberOut[4] -> dpDemo.run
 
       # Rate group 3
       rateGroupDriverComp.CycleOut[Ports_RateGroups.rateGroup3] -> rateGroup3Comp.CycleIn
@@ -218,6 +220,11 @@ module Ref {
       dpMgr.productResponseOut[0] -> SG1.productRecvIn
       # Send filled DP
       SG1.productSendOut -> dpMgr.productSendIn[0]
+
+      # Synchronous request
+      dpDemo.productGetOut -> dpMgr.productGetIn[0]
+      # Send filled DP
+      dpDemo.productSendOut -> dpMgr.productSendIn[0]
 
     }
 

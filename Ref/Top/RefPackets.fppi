@@ -265,4 +265,6 @@ telemetry packets RefPackets {
 
 } omit {
   CDHCore.cmdDisp.CommandErrors
+  Ref.dpDemo.Color
+  Ref.dpDemo.DpCounter
 }

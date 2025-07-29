@@ -48,7 +48,7 @@ class DpDemo final : public DpDemoComponentBase {
     //! Command for generating a DP
     void Dp_cmdHandler(FwOpcodeType opCode,  //!< The opcode
                        U32 cmdSeq,           //!< The command sequence number
-                       U32 records,
+                       DpDemo_DpReqType reqType,
                        U32 priority) override;
 
   PRIVATE:
@@ -56,15 +56,18 @@ class DpDemo final : public DpDemoComponentBase {
     // Handler implementations for data products
     // ----------------------------------------------------------------------
 
+    //! Receive a container of type DpDemoContainer
+    void dpRecv_DpDemoContainer_handler(DpContainer& container,  //!< The container
+                                        Fw::Success::T status    //!< The container status
+                                        ) override;
+
     // DP cleanup helper
     void cleanupAndSendDp();
 
     // Member variables
     DpDemo_ColorEnum selectedColor;
-    U32 numDps;
-    U32 currDp;
+    U32 numRecords;
     U32 dpPriority;
-    U32 dpBytes;
     DpContainer dpContainer;
     bool dpInProgress;
 };

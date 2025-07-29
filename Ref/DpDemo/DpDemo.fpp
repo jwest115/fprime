@@ -8,9 +8,58 @@ module Ref {
             BLUE
         }
 
+        enum DpReqType {
+            IMMEDIATE
+            ASYNC
+        }
+
+        type StringAlias = string
+        type BoolAlias = bool
+        type I32Alias = I32
+        type F64Alias = F64
+
+        @ Array of floats
+        array F32Array = [3] F32
+
+        @ Array of integers
+        array U32Array = [5] U32
+
+        @ Array of strings
+        array StringArray = [2] string
+
+        @ Array of array of strings
+        array ArrayOfStringArray = [3] StringArray
+
+        @ Array of booleans
+        array BooleanArray = [2] bool
+
+        @ Array of enumerations
+        array EnumArray = [3] ColorEnum
+
+        array ArrayOfStructs = [3] StructWithStringMembers
+
         struct ColorInfoStruct {
             Color: ColorEnum
-            # TODO: add more things here
+        }
+
+        struct StructWithStringMembers {
+            stringMember: string,
+            stringArrayMember: StringArray
+        }
+
+        struct StructWithEverything {
+            integerMember: I32Alias,
+            floatMember: F32,
+            stringMember: string,
+            booleanMember: bool,
+            enumMember: ColorEnum,
+            F32Array: F32Array,
+            U32Array: U32Array,
+            enumArray: EnumArray
+            stringArray: StringArray,
+            booleanArray: BooleanArray,
+            structWithStrings: StructWithStringMembers
+            nestedArrays: ArrayOfStringArray
         }
 
         # One async command/port is required for active components
@@ -23,7 +72,7 @@ module Ref {
         ##############################################################################
 
         @ Command for generating a DP
-        sync command Dp(records: U32, $priority: U32)
+        sync command Dp(reqType: DpReqType, $priority: U32)
 
         @ DP counter
         telemetry DpCounter: U64
@@ -41,10 +90,10 @@ module Ref {
             format "Writing {} DP records"
 
         @ DP complete event
-        event DpComplete(records: U32, bytes: U32) \
+        event DpComplete(records: U32) \
             severity activity low \
             id 2 \
-            format "Writing {} DP records {} bytes total"
+            format "Finished writing {} DP records"
 
         event DpRecordFull(records: U32, bytes: U32) \
             severity warning low \
@@ -53,18 +102,23 @@ module Ref {
 
         event DpMemRequested($size: FwSizeType) \
             severity activity low \
-            id 7 \
+            id 4 \
             format "Requesting {} bytes for DP"
 
         event DpMemReceived($size: FwSizeType) \
             severity activity low \
-            id 8 \
+            id 5 \
             format "Received {} bytes for DP"
 
         event DpMemoryFail \
             severity warning high \
-            id 5 \
+            id 6 \
             format "Failed to acquire a DP buffer"
+
+        event DpsNotConnected \
+            severity warning high \
+            id 7 \
+            format "DP Ports not connected!"
 
         @ Example port: receiving calls from the rate group
         sync input port run: Svc.Sched
@@ -105,14 +159,59 @@ module Ref {
         @ Data product get port
         product get port productGetOut
 
+        @ Data product request port
+        product request port productRequestOut
+
+        @ Data product receive port
+        async product recv port productRecvIn
+
         @ Data product send port
         product send port productSendOut
 
-        @ Data product record
-        product record ColorDataRecord: ColorInfoStruct id 0
+        @ Data product record - struct record
+        product record ColorInfoStructRecord: ColorInfoStruct id 0
+
+        @ Data product record - enum
+        product record ColorEnumRecord: ColorEnum id 1
+
+        @ Data product record - string
+        product record StringRecord: StringAlias id 2
+
+        @ Data product record - boolean
+        product record BooleanRecord: BoolAlias id 3
+
+        @ Data product record - I32
+        product record I32Record: I32Alias id 4
+
+        @ Data product record - F64
+        product record F64Record: F64Alias id 5
+
+        @ Data product record - U32 array record
+        product record U32ArrayRecord: U32Array id 6
+
+        @ Data product record - F32 array record
+        product record F32ArrayRecord: F32Array id 7
+
+        @ Data product record - boolean array record
+        product record BooleanArrayRecord: BooleanArray id 8
+
+        @ Data product record - enum array record
+        product record EnumArrayRecord: EnumArray id 9
+
+        @ Data product record - string array record
+        product record StringArrayRecord: string array id 10
+
+        @ Data product record - array of string array record
+        product record ArrayOfStringArrayRecord: ArrayOfStringArray id 11
+
+        @ Data product record - struct record
+        product record StructWithEverythingRecord: StructWithEverything id 12
+
+        @ Data product record - array of structs
+        product record ArrayOfStructsRecord: ArrayOfStructs id 13
 
         @ Data product container
-        product container ColorDataContainer id 0 default priority 10
+        product container DpDemoContainer id 0 default priority 10
 
     }
 }

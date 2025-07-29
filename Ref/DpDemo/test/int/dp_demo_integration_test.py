@@ -1,16 +1,13 @@
-import time
 import os
-import glob
-from fprime_gds.common.testing_fw import predicates
+import json
+from deepdiff import DeepDiff
 from fprime_gds.executables.data_product_writer import DataProductWriter
 
 def test_dp_send(fprime_test_api):
     """Test that DPs are generated and received on the ground"""
 
-    # Send the SelectColor command to select a color
-    fprime_test_api.send_and_assert_command("Ref.dpDemo.SelectColor", ["GREEN"])    
     # Run Dp command to send a data product
-    fprime_test_api.send_and_assert_command("Ref.dpDemo.Dp", [1, 1])
+    fprime_test_api.send_and_assert_command("Ref.dpDemo.Dp", ["IMMEDIATE", 1])
     # Wait for DpStarted event
     result = fprime_test_api.await_event("Ref.dpDemo.DpStarted", start=0, timeout=5)
     assert result
@@ -28,7 +25,7 @@ def test_dp_decode(fprime_test_api):
     """Test that we can decode DPs on the ground via fprime_dp_writer"""
 
     # Run Dp command to send a data product
-    fprime_test_api.send_and_assert_command("Ref.dpDemo.Dp", [1, 1])
+    fprime_test_api.send_and_assert_command("Ref.dpDemo.Dp", ["IMMEDIATE", 1])
     # Check for FileWritten event and capture the name of the file that was created
     file_result = fprime_test_api.await_event("Ref.dpWriter.FileWritten", start=0, timeout=10)
     dp_file_path = file_result.get_display_text().split().pop()
@@ -40,5 +37,13 @@ def test_dp_decode(fprime_test_api):
     decoded_file_name = os.path.basename(dp_file_path).replace(".fdp", ".json")
     DataProductWriter(json_dict, dp_file_path).process()
     assert os.path.isfile(decoded_file_name)
-    
-
+    with open("./DpDemo/test/int/dp_ref_output.json", 'r') as ref_file, open(decoded_file_name, 'r') as output_file:
+        ref_json = json.load(ref_file)
+        output_json = json.load(output_file)
+    assert not DeepDiff(ref_json, output_json, ignore_order=True, exclude_paths=[
+        "root[0]['Seconds']", 
+        "root[0]['USeconds']", 
+        "root[0]['TimeBase']", 
+        "root[0]['Context']", 
+        "root[0]['headerHash']",
+    ])

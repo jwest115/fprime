@@ -74,12 +74,6 @@ module Ref {
 
         @ Command for generating a DP
         sync command Dp(reqType: DpReqType, $priority: U32)
-
-        @ DP counter
-        telemetry DpCounter: U64
-
-        @ Current color selected
-        telemetry Color: ColorEnum
         
         @ Color selected event
         event ColorSelected(color: ColorEnum) severity activity high id 0 format "Color selected {}"

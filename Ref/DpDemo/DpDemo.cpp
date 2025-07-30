@@ -132,7 +132,6 @@ namespace Ref {
 
     void DpDemo ::SelectColor_cmdHandler(FwOpcodeType opCode, U32 cmdSeq, Ref::DpDemo_ColorEnum color) {
         this->selectedColor = color;
-        this->tlmWrite_Color(this->selectedColor);
         log_ACTIVITY_HI_ColorSelected(color);
         this->cmdResponse_out(opCode, cmdSeq, Fw::CmdResponse::OK);
     }

@@ -139,6 +139,7 @@ DATAROOTDIR
 DDDTHH
 Debian
 deconstructor
+deepdiff
 deframe
 deframed
 deframer
@@ -337,6 +338,7 @@ itr
 itrunc
 itval
 janamian
+jawest
 Jax
 jdk
 jdperez

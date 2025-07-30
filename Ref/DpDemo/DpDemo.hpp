@@ -24,7 +24,7 @@ class DpDemo final : public DpDemoComponentBase {
     //! Destroy DpDemo object
     ~DpDemo();
 
-  PRIVATE:
+  private:
     // ----------------------------------------------------------------------
     // Handler implementations for commands
     // ----------------------------------------------------------------------
@@ -51,7 +51,7 @@ class DpDemo final : public DpDemoComponentBase {
                        DpDemo_DpReqType reqType,
                        U32 priority) override;
 
-  PRIVATE:
+  private:
     // ----------------------------------------------------------------------
     // Handler implementations for data products
     // ----------------------------------------------------------------------

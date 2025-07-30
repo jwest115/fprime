@@ -41,11 +41,7 @@ module Ref {
     instance sendBuffComp
     instance typeDemo
     instance systemResources
-    instance dpCat
     instance dpDemo
-    instance dpMgr
-    instance dpWriter
-    instance dpBufferManager
     instance linuxTimer
     instance comDriver
     instance cmdSeq
@@ -139,10 +135,12 @@ module Ref {
       # Send filled DP
       SG1.productSendOut -> DataProducts.dpMgr.productSendIn
       # Synchronous request
-      dpDemo.productGetOut -> dpMgr.productGetIn[0]
+      dpDemo.productGetOut -> DataProducts.dpMgr.productGetIn
       # Send filled DP
-      dpDemo.productSendOut -> dpMgr.productSendIn[0]
-
+      dpDemo.productSendOut -> DataProducts.dpMgr.productSendIn
+      # Asynchronous request
+      dpDemo.productRequestOut -> DataProducts.dpMgr.productRequestIn
+      DataProducts.dpMgr.productResponseOut -> dpDemo.productRecvIn
     }
 
     connections ComCcsds_CdhCore{

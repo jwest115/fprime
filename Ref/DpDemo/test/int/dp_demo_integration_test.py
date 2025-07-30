@@ -15,7 +15,7 @@ def test_dp_send(fprime_test_api):
     result = fprime_test_api.await_event("Ref.dpDemo.DpComplete", start=0, timeout=10)
     assert result
     # Check for FileWritten event and capture the name of the file that was created
-    file_result = fprime_test_api.await_event("Ref.dpWriter.FileWritten", start=0, timeout=10)
+    file_result = fprime_test_api.await_event("DataProducts.dpWriter.FileWritten", start=0, timeout=10)
     dp_file_path = file_result.get_display_text().split().pop()
     # Verify that the file exists
     # Assumes that we are running the test from the Ref directory
@@ -27,7 +27,7 @@ def test_dp_decode(fprime_test_api):
     # Run Dp command to send a data product
     fprime_test_api.send_and_assert_command("Ref.dpDemo.Dp", ["IMMEDIATE", 1])
     # Check for FileWritten event and capture the name of the file that was created
-    file_result = fprime_test_api.await_event("Ref.dpWriter.FileWritten", start=0, timeout=10)
+    file_result = fprime_test_api.await_event("DataProducts.dpWriter.FileWritten", start=0, timeout=10)
     dp_file_path = file_result.get_display_text().split().pop()
     # Verify that the file exists
     # Assumes that we are running the test from the Ref directory

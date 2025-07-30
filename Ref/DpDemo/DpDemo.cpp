@@ -87,6 +87,10 @@ namespace Ref {
                 Fw::String("String Member"),
                 false,
                 this->selectedColor,
+                { 
+                    DpDemo_U32Array(1, 2, 3, 4, 5), 
+                    DpDemo_U32Array(6, 7, 8, 9, 10)
+                },
                 DpDemo_F32Array(4.4f, 5.5f, 6.6f),
                 DpDemo_U32Array(6, 7, 8, 9, 10),
                 DpDemo_EnumArray(DpDemo_ColorEnum::RED, DpDemo_ColorEnum::GREEN, DpDemo_ColorEnum::BLUE),

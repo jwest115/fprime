@@ -53,6 +53,7 @@ module Ref {
             stringMember: string,
             booleanMember: bool,
             enumMember: ColorEnum,
+            arrayMemberU32: [2] U32Array,
             F32Array: F32Array,
             U32Array: U32Array,
             enumArray: EnumArray

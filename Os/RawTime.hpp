@@ -77,7 +77,9 @@ class RawTimeInterface : public Fw::Serializable {
     //!
     //! \param buffer The buffer to serialize the contents into.
     //! \return Fw::SerializeStatus indicating the result of the serialization.
-    virtual Fw::SerializeStatus serialize(Fw::SerializeBufferBase& buffer) const = 0;
+    virtual Fw::SerializeStatus serializeTo(Fw::SerializeBufferBase& buffer) const {
+        return this->serialize(buffer);
+    }
 
     //! \brief Deserialize the contents of the RawTimeInterface object from a buffer.
     //!
@@ -91,7 +93,9 @@ class RawTimeInterface : public Fw::Serializable {
     //!
     //! \param buffer The buffer to deserialize the contents from.
     //! \return Fw::SerializeStatus indicating the result of the deserialization.
-    virtual Fw::SerializeStatus deserialize(Fw::SerializeBufferBase& buffer) = 0;
+    virtual Fw::SerializeStatus deserializeFrom(Fw::SerializeBufferBase& buffer) {
+        return this->deserialize(buffer);
+    }
 
 };
 
@@ -144,7 +148,7 @@ class RawTime final : public RawTimeInterface {
     //!
     //! \param buffer The buffer to serialize the contents into.
     //! \return Fw::SerializeStatus indicating the result of the serialization.
-    Fw::SerializeStatus serialize(Fw::SerializeBufferBase& buffer) const override;
+    Fw::SerializeStatus serializeTo(Fw::SerializeBufferBase& buffer) const override;
 
     //! \brief Deserialize the contents of the RawTimeInterface object from a buffer.
     //!
@@ -158,6 +162,14 @@ class RawTime final : public RawTimeInterface {
     //!
     //! \param buffer The buffer to deserialize the contents from.
     //! \return Fw::SerializeStatus indicating the result of the deserialization.
+    Fw::SerializeStatus deserializeFrom(Fw::SerializeBufferBase& buffer) override;
+
+    // ----------------------------------------------------------------------
+    // Methods
+    // ----------------------------------------------------------------------
+
+    Fw::SerializeStatus serialize(Fw::SerializeBufferBase& buffer) const override;
+
     Fw::SerializeStatus deserialize(Fw::SerializeBufferBase& buffer) override;
 
     // ------------------------------------------------------------
@@ -178,6 +190,8 @@ class RawTime final : public RawTimeInterface {
     //! \return Status indicating the result of the operation.
     Status getDiffUsec(const RawTime& other, U32& result) const;
 
+    //! \brief Compare whether two RawTime objects are the same (i.e. refer to the same microsecond)
+    bool operator==(const RawTime& other) const;
 
   private:
     // This section is used to store the implementation-defined RawTime handle. To Os::RawTime and fprime, this type is

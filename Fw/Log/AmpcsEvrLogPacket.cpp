@@ -22,10 +22,20 @@ namespace Fw {
     }
 
     SerializeStatus AmpcsEvrLogPacket::serialize(SerializeBufferBase& buffer) const {
+        // Deprecated method - calls new interface for backward compatibility
+        return this->serializeTo(buffer);
+    }
+
+    SerializeStatus AmpcsEvrLogPacket::deserialize(SerializeBufferBase& buffer) {
+        // Deprecated method - calls new interface for backward compatibility
+        return this->deserializeFrom(buffer);
+    }
+
+    SerializeStatus AmpcsEvrLogPacket::serializeTo(SerializeBufferBase& buffer) const {
 
         SerializeStatus stat;
 
-        stat = buffer.serialize(this->m_taskName, AMPCS_EVR_TASK_NAME_LEN, true);
+        stat = buffer.serialize(this->m_taskName, AMPCS_EVR_TASK_NAME_LEN, Fw::Serialization::OMIT_LENGTH);
         if (stat != FW_SERIALIZE_OK) {
             return stat;
         }
@@ -45,11 +55,11 @@ namespace Fw {
             return stat;
         }
 
-        return buffer.serialize(this->m_logBuffer.getBuffAddr(),m_logBuffer.getBuffLength(),true);
+        return buffer.serialize(this->m_logBuffer.getBuffAddr(),m_logBuffer.getBuffLength(),Fw::Serialization::OMIT_LENGTH);
 
     }
 
-    SerializeStatus AmpcsEvrLogPacket::deserialize(SerializeBufferBase& buffer) {
+    SerializeStatus AmpcsEvrLogPacket::deserializeFrom(SerializeBufferBase& buffer) {
         FwSizeType len;
 
         SerializeStatus stat;

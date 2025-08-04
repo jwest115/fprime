@@ -10,30 +10,12 @@
 #
 ####
 
-# Module names are derived from the path from the nearest project/library/framework
-# root when not specifically overridden by the developer. i.e. The module defined by
-# `Ref/SignalGen/CMakeLists.txt` will be named `Ref_SignalGen`.
-
 register_fprime_library(
     AUTOCODER_INPUTS
         "${CMAKE_CURRENT_LIST_DIR}/DpDemo.fpp"
     SOURCES
         "${CMAKE_CURRENT_LIST_DIR}/DpDemo.cpp"
-#   DEPENDS
-#       MyPackage_MyOtherModule
 )
-
-### Unit Tests ###
-# register_fprime_ut(
-#     AUTOCODER_INPUTS
-#         "${CMAKE_CURRENT_LIST_DIR}/DpDemo.fpp"
-#     SOURCES
-#         "${CMAKE_CURRENT_LIST_DIR}/test/ut/DpDemoTestMain.cpp"
-#         "${CMAKE_CURRENT_LIST_DIR}/test/ut/DpDemoTester.cpp"
-#     DEPENDS
-#         STest # For rules-based testing
-#     UT_AUTO_HELPERS
-# )
 
 set(SOURCE_FILES
     "${CMAKE_CURRENT_LIST_DIR}/DpDemo.fpp"

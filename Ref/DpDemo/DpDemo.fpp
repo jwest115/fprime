@@ -63,14 +63,8 @@ module Ref {
             nestedArrays: ArrayOfStringArray
         }
 
-        # One async command/port is required for active components
-        # This should be overridden by the developers with a useful command/port
         @ Select color
         async command SelectColor(color: ColorEnum) opcode 0
-
-        ##############################################################################
-        #### Uncomment the following examples to start customizing your component ####
-        ##############################################################################
 
         @ Command for generating a DP
         sync command Dp(reqType: DpReqType, $priority: U32)

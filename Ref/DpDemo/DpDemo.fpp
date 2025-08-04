@@ -196,14 +196,20 @@ module Ref {
         @ Data product record - string array record
         product record StringArrayRecord: string array id 10
 
+        @ Data product record - struct array record
+        product record StructArrayRecord: StructWithStringMembers array id 11
+
+        @ Data product record - array array record
+        product record ArrayArrayRecord: StringArray array id 12
+
         @ Data product record - array of string array record
-        product record ArrayOfStringArrayRecord: ArrayOfStringArray id 11
+        product record ArrayOfStringArrayRecord: ArrayOfStringArray id 13
 
         @ Data product record - struct record
-        product record StructWithEverythingRecord: StructWithEverything id 12
+        product record StructWithEverythingRecord: StructWithEverything id 14
 
         @ Data product record - array of structs
-        product record ArrayOfStructsRecord: ArrayOfStructs id 13
+        product record ArrayOfStructsRecord: ArrayOfStructs id 15
 
         @ Data product container
         product container DpDemoContainer id 0 default priority 10

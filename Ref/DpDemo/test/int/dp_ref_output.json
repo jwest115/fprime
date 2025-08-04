@@ -4,9 +4,9 @@
     "Id": 2576,
     "Priority": 1,
     "Seconds": 131176,
-    "USeconds": 2305770240,
-    "TimeBase": 3346,
-    "Context": 167,
+    "USeconds": 2435760640,
+    "TimeBase": 2418,
+    "Context": 210,
     "ProcTypes": 0,
     "UserData": [
       0,
@@ -43,9 +43,9 @@
       0
     ],
     "DpState": 0,
-    "DataSize": 980,
-    "headerHash": 538522037,
-    "dataHash": 2044073562
+    "DataSize": 1212,
+    "headerHash": 2646027546,
+    "dataHash": 4072048964
   },
   {
     "dataId": 2578,
@@ -98,7 +98,45 @@
     ]
   },
   {
+    "dataId": 2588,
+    "size": 1,
+    "data": [
+      [
+        "0 - String array record element 0",
+        "0 - String array record element 1"
+      ]
+    ]
+  },
+  {
     "dataId": 2587,
+    "size": 2,
+    "data": [
+      [
+        {
+          "stringMember": "0 - String member"
+        },
+        {
+          "stringArrayMember": [
+            "0 - String array element 0",
+            "0 - String array element 1"
+          ]
+        }
+      ],
+      [
+        {
+          "stringMember": "1 - String member"
+        },
+        {
+          "stringArrayMember": [
+            "1 - String array element 0",
+            "1 - String array element 1"
+          ]
+        }
+      ]
+    ]
+  },
+  {
+    "dataId": 2589,
     "data": [
       [
         "0 - String array element 0",
@@ -115,7 +153,7 @@
     ]
   },
   {
-    "dataId": 2589,
+    "dataId": 2591,
     "data": [
       [
         {
@@ -161,7 +199,7 @@
     ]
   },
   {
-    "dataId": 2588,
+    "dataId": 2590,
     "data": [
       {
         "integerMember": -1

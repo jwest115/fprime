@@ -139,7 +139,6 @@ DATAROOTDIR
 DDDTHH
 Debian
 deconstructor
-deepdiff
 deframe
 deframed
 deframer

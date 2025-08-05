@@ -2,6 +2,7 @@ import os
 import json
 from fprime_gds.executables.data_product_writer import DataProductWriter
 
+
 def test_dp_send(fprime_test_api):
     """Test that DPs are generated and received on the ground"""
 

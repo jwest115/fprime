@@ -1,8 +1,6 @@
 import os
 import json
-from deepdiff import DeepDiff
 from fprime_gds.executables.data_product_writer import DataProductWriter
-
 
 def test_dp_send(fprime_test_api):
     """Test that DPs are generated and received on the ground"""
@@ -48,15 +46,13 @@ def test_dp_decode(fprime_test_api):
     ) as output_file:
         ref_json = json.load(ref_file)
         output_json = json.load(output_file)
-    assert not DeepDiff(
-        ref_json,
-        output_json,
-        ignore_order=True,
-        exclude_paths=[
-            "root[0]['Seconds']",
-            "root[0]['USeconds']",
-            "root[0]['TimeBase']",
-            "root[0]['Context']",
-            "root[0]['headerHash']",
-        ],
-    )
+        # Remove fields that we expect to be different
+        exclude = ["Seconds", "USeconds", "TimeBase", "Context", "headerHash"]
+        assert len(ref_json) > 0 and len(output_json) > 0
+        for f in exclude:
+            assert isinstance(ref_json[0], dict) and isinstance(output_json[0], dict)
+            assert f in ref_json[0] and f in output_json[0]
+            ref_json[0].pop(f)
+            output_json[0].pop(f)
+        # Check that the JSON strings are the same
+        assert json.dumps(ref_json) == json.dumps(output_json)

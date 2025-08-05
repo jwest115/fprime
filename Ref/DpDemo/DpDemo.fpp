@@ -190,13 +190,13 @@ module Ref {
         @ Data product record - string array record
         product record StringArrayRecord: string array id 10
 
-        @ Data product record - struct array record
+        @ Data product record - array record (structs)
         product record StructArrayRecord: StructWithStringMembers array id 11
 
-        @ Data product record - array array record
+        @ Data product record - array record (arrays)
         product record ArrayArrayRecord: StringArray array id 12
 
-        @ Data product record - array of string array record
+        @ Data product record - array record (string arrays)
         product record ArrayOfStringArrayRecord: ArrayOfStringArray id 13
 
         @ Data product record - struct record

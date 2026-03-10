@@ -512,7 +512,7 @@ Example JSON of an enum
 
 ### Struct Values
 
-**JSON Dictionary** mapping struct member names to their values. Each key in the dictionary corresponds to a struct member name. The value associated with each key matches the type specified in the [Struct Member](#struct-member-descriptor). If the struct member does not specify a size, then the value is a single value of that type. If the struct member does specify a size, then the value is an array of *size* elements, where each element is a value of the type specified for the member.
+**JSON Dictionary** mapping struct member names to their values. Each key in the dictionary corresponds to a struct member name. The type of the value associated with each key matches the type specified in the [Struct Member](#struct-member-descriptor). If the struct member does not specify a size, then the value is a single value of that type. If the struct member does specify a size, then the value is an array of *size* elements, where each element is a value of the type specified for the member.
 
 Example FPP struct:
 ```

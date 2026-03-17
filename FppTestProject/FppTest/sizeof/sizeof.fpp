@@ -7,25 +7,26 @@ constant SizeofI16 = sizeof(I16)
 constant SizeofI32 = sizeof(I32)
 constant SizeofI64 = sizeof(I64)
 constant SizeofF32 = sizeof(F32)
-constant SizeofF63 = sizeof(F64)
+constant SizeofF64 = sizeof(F64)
 constant SizeofBool = sizeof(bool)
-
 
 type StringDefaultAlias = string
 constant SizeofStringDefaultAlias = sizeof(StringDefaultAlias)
 type StringAlias = string size 100
 constant SizeofStringAlias = sizeof(StringAlias)
 
-
 type U64Alias = U64
 constant SizeofU64Alias = sizeof(U64Alias)
 type EnumAlias = E
 constant SizeofEnumAlias = sizeof(EnumAlias)
 
-array A = [3] U64
+array A = [3] I64
 constant SizeofArray = sizeof(A)
 
-enum E: U8 {
+array A2 = [2] A
+constant SizeofArray2 = sizeof(A2)
+
+enum E: U16 {
     X,
     Y,
     Z
@@ -33,8 +34,16 @@ enum E: U8 {
 constant SizeofEnum = sizeof(E)
 
 struct S {
-    m1: A,
+    m1: [2] A,
     m2: F64
-    m4: string size 10
+    m3: [1] EnumAlias
+    m4: [3] string size 10
 }
 constant SizeofStruct = sizeof(S)
+
+struct S2 {
+    m1: A2
+    m2: StringAlias
+    m3: [2] S
+}
+constant SizeofStruct2 = sizeof(S2)

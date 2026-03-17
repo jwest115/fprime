@@ -7,11 +7,6 @@ set(SOURCE_FILES
 )
 register_fprime_module()
 
-# Declare dependencies on test modules
-set(UT_MOD_DEPS
-  Fw/Test
-  STest
-)
 
 set(UT_SOURCE_FILES
   "${CMAKE_CURRENT_LIST_DIR}/sizeof.fpp"

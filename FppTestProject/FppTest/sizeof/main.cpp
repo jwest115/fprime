@@ -2,15 +2,15 @@
 // main.cpp
 // ----------------------------------------------------------------------
 
-#include "FppTest/sizeof/A2ArrayAc.hpp"
-#include "FppTest/sizeof/AArrayAc.hpp"
-#include "FppTest/sizeof/EEnumAc.hpp"
 #include "FppTest/sizeof/EnumAliasAliasAc.hpp"
 #include "FppTest/sizeof/FppConstantsAc.hpp"
-#include "FppTest/sizeof/S2SerializableAc.hpp"
-#include "FppTest/sizeof/SSerializableAc.hpp"
 #include "FppTest/sizeof/StringAliasAliasAc.hpp"
 #include "FppTest/sizeof/StringDefaultAliasAliasAc.hpp"
+#include "FppTest/sizeof/TestArray1ArrayAc.hpp"
+#include "FppTest/sizeof/TestArray2ArrayAc.hpp"
+#include "FppTest/sizeof/TestEnum1EnumAc.hpp"
+#include "FppTest/sizeof/TestStruct1SerializableAc.hpp"
+#include "FppTest/sizeof/TestStruct2SerializableAc.hpp"
 #include "FppTest/sizeof/U64AliasAliasAc.hpp"
 #include "gtest/gtest.h"
 
@@ -37,20 +37,20 @@ TEST(SizeofTest, AliasType) {
 }
 
 TEST(SizeofTest, Array) {
-    ASSERT_EQ(SizeofArray, A::SERIALIZED_SIZE);
+    ASSERT_EQ(SizeofArray, TestArray1::SERIALIZED_SIZE);
     ASSERT_EQ(SizeofArray, 24);
-    ASSERT_EQ(SizeofArray2, A2::SERIALIZED_SIZE);
+    ASSERT_EQ(SizeofArray2, TestArray2::SERIALIZED_SIZE);
     ASSERT_EQ(SizeofArray2, 48);
 }
 
 TEST(SizeofTest, Enum) {
-    ASSERT_EQ(SizeofEnum, E::SERIALIZED_SIZE);
+    ASSERT_EQ(SizeofEnum, TestEnum1::SERIALIZED_SIZE);
     ASSERT_EQ(SizeofEnum, 2);
 }
 
 TEST(SizeofTest, Struct) {
-    ASSERT_EQ(SizeofStruct, S::SERIALIZED_SIZE);
+    ASSERT_EQ(SizeofStruct, TestStruct1::SERIALIZED_SIZE);
     ASSERT_EQ(SizeofStruct, 94);
-    ASSERT_EQ(SizeofStruct2, S2::SERIALIZED_SIZE);
+    ASSERT_EQ(SizeofStruct2, TestStruct2::SERIALIZED_SIZE);
     ASSERT_EQ(SizeofStruct2, 338);
 }

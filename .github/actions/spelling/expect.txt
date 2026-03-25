@@ -671,6 +671,7 @@ sqa
 srandom
 SRCS
 sreddy
+SSerializable
 sss
 STAMEM
 startuml

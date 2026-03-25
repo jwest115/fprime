@@ -2,17 +2,17 @@
 // main.cpp
 // ----------------------------------------------------------------------
 
-#include "FppTest/sizeof/AArrayAc.hpp"
 #include "FppTest/sizeof/A2ArrayAc.hpp"
-#include "FppTest/sizeof/FppConstantsAc.hpp"
+#include "FppTest/sizeof/AArrayAc.hpp"
 #include "FppTest/sizeof/EEnumAc.hpp"
-#include "FppTest/sizeof/SSerializableAc.hpp"
+#include "FppTest/sizeof/EnumAliasAliasAc.hpp"
+#include "FppTest/sizeof/FppConstantsAc.hpp"
 #include "FppTest/sizeof/S2SerializableAc.hpp"
+#include "FppTest/sizeof/SSerializableAc.hpp"
 #include "FppTest/sizeof/StringAliasAliasAc.hpp"
 #include "FppTest/sizeof/StringDefaultAliasAliasAc.hpp"
 #include "FppTest/sizeof/U64AliasAliasAc.hpp"
-#include "FppTest/sizeof/EnumAliasAliasAc.hpp"
-#include <gtest/gtest.h>
+#include "gtest/gtest.h"
 
 TEST(SizeofTest, Primitives) {
     ASSERT_EQ(SizeofU8, sizeof(U8));
